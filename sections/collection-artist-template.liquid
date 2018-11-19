@@ -1,0 +1,548 @@
+<!-- FEATURE ROW 1 -->
+<div class="shopify-section index-section">
+  <div class="page-width feature-row">
+    {% capture image_layout %}
+      <div class="feature-row__item">
+        {% if section.settings.image_1 != blank %}
+          {% capture img_id %}FeatureRowImage-{{ section.id }}{% endcapture %}
+          {% capture wrapper_id %}FeatureRowImageWrapper-{{ section.id }}{% endcapture %}
+          {%- assign img_url = section.settings.image_1 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+          {% include 'image-style' with image: section.settings.image_1, width: 545, height: 545, small_style: true, wrapper_id: wrapper_id, img_id: img_id %}
+          <div id="{{ wrapper_id }}" class="feature-row__image-wrapper js">
+            <div style="padding-top:{{ 1 | divided_by: section.settings.image_1.aspect_ratio | times: 100}}%;">
+              <img id="{{ img_id }}"
+                   class="feature-row__image"
+                   src="{{ section.settings.image_1 | img_url: '900x' }}"
+                   data-src="{{ img_url }}"
+                   data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                   data-aspectratio="{{ section.settings.image_1.aspect_ratio }}"
+                   data-sizes="auto"
+                   alt="{{ section.settings.image_1.alt | escape }}">
+            </div>
+          </div>
+
+          <noscript>
+            {{ section.settings.image_1 | img_url: '600x600', scale: 2 | img_tag: section.settings.image_1.alt, 'feature-row__image' }}
+          </noscript>
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+    {% endcapture %}
+
+    <div class="feature-row">
+      {% if section.settings.layout_1 == 'left' %}
+        {{ image_layout }}
+      {% endif %}
+
+      <div class="feature-row__item feature-row__text feature-row__text--{{ section.settings.layout_1 }}">
+        {% if section.settings.title_1 != blank %}
+          <h2 class="h3">{{ section.settings.title_1 | escape }}</h2>
+        {% endif %}
+        {% if section.settings.text_1 != blank %}
+          <div class="rte-setting featured-row__subtext">{{ section.settings.text_1 }}</div>
+        {% endif %}
+        {% if section.settings.button_label_1 != blank and section.settings.button_link_1 != blank %}
+          <a href="{{ section.settings.button_link_1 }}" class="btn">
+            {{ section.settings.button_label_1 | escape }}
+          </a>
+        {% endif %}
+      </div>
+
+      {% if section.settings.layout_1 == 'right' %}
+        {{ image_layout }}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- COLLECTION 1 -->
+<div class="shopify-section index-section">
+  <div class="page-width">
+    {% if section.settings.collection_title != blank %}
+      <div class="section-header text-center">
+        <h2>{{ section.settings.collection_title | escape }}</h2>
+      </div>
+    {% endif %}
+
+    {%- assign collection = collections[section.settings.collection] -%}
+
+    {% case section.settings.grid %}
+      {% when 2 %}
+        {%- assign max_height = 530 -%}
+        {%- assign grid_item_width = 'medium-up--one-half' -%}
+      {% when 3 %}
+        {%- assign max_height = 345 -%}
+        {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
+      {% when 4 %}
+        {%- assign max_height = 250 -%}
+        {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+      {% when 5 %}
+        {%- assign max_height = 195 -%}
+        {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
+    {% endcase %}
+
+    {%- assign product_limit = section.settings.grid | times: 1 -%}
+
+    <div class="grid grid--uniform grid--view-items">
+      {% for product in collection.products limit: product_limit %}
+        {% if forloop.index < 4 %}
+          <div class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
+            {% include 'product-card-grid', max_height: max_height %}
+          </div>
+        {% else %}
+          {% continue %}
+        {% endif %}
+      {% else %}
+
+        {% for i in (1..product_limit) %}
+          <div class="grid__item .grid__item--{{section.id}} {{ grid_item_width }}">
+            <div class="grid-view-item">
+              <a href="#" class="grid-view-item__link">
+                <div class="grid-view-item__image">
+                  {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                  {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+                <div class="h4 grid-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
+                <div class="grid-view-item__meta">
+                  {% include 'product-price' %}
+                </div>
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- FEATURE ROW 2 -->
+<div class="shopify-section index-section">
+  <div class="page-width feature-row">
+    {% capture image_layout %}
+      <div class="feature-row__item">
+        {% if section.settings.image_2 != blank %}
+          {% capture img_id %}FeatureRowImage-{{ section.id }}{% endcapture %}
+          {% capture wrapper_id %}FeatureRowImageWrapper-{{ section.id }}{% endcapture %}
+          {%- assign img_url = section.settings.image_2 | img_url: '1x1' | replace: '_2x1.', '_{width}x.' -%}
+          {% include 'image-style' with image: section.settings.image_2, width: 545, height: 545, small_style: true, wrapper_id: wrapper_id, img_id: img_id %}
+          <div id="{{ wrapper_id }}" class="feature-row__image-wrapper js">
+            <div style="padding-top:{{ 1 | divided_by: section.settings.image_2.aspect_ratio | times: 100}}%;">
+              <img id="{{ img_id }}"
+                   class="feature-row__image"
+                   src="{{ section.settings.image_2 | img_url: '900x' }}"
+                   data-src="{{ img_url }}"
+                   data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                   data-aspectratio="{{ section.settings.image_2.aspect_ratio }}"
+                   data-sizes="auto"
+                   alt="{{ section.settings.image_2.alt | escape }}">
+            </div>
+          </div>
+
+          <noscript>
+            {{ section.settings.image_2 | img_url: '600x600', scale: 2 | img_tag: section.settings.image_2.alt, 'feature-row__image' }}
+          </noscript>
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+    {% endcapture %}
+
+    <div class="feature-row">
+      {% if section.settings.layout_2 == 'left' %}
+        {{ image_layout }}
+      {% endif %}
+
+      <div class="feature-row__item feature-row__text feature-row__text--{{ section.settings.layout_2 }}">
+        {% if section.settings.title_2 != blank %}
+          <h2 class="h3">{{ section.settings.title_2 | escape }}</h2>
+        {% endif %}
+        {% if section.settings.text_2 != blank %}
+          <div class="rte-setting featured-row__subtext">{{ section.settings.text_2 }}</div>
+        {% endif %}
+        {% if section.settings.button_label_2 != blank and section.settings.button_link_2 != blank %}
+          <a href="{{ section.settings.button_link_2 }}" class="btn">
+            {{ section.settings.button_label_2 | escape }}
+          </a>
+        {% endif %}
+      </div>
+
+      {% if section.settings.layout_2 == 'right' %}
+        {{ image_layout }}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- COLLECTION 2 -->
+<div class="shopify-section index-section">
+  <div class="page-width">
+    {% if section.settings.collection_title != blank %}
+      <div class="section-header text-center">
+        <h2>{{ section.settings.collection_title | escape }}</h2>
+      </div>
+    {% endif %}
+
+    {%- assign collection = collections[section.settings.collection] -%}
+
+    {% case section.settings.grid %}
+      {% when 2 %}
+        {%- assign max_height = 530 -%}
+        {%- assign grid_item_width = 'medium-up--one-half' -%}
+      {% when 3 %}
+        {%- assign max_height = 345 -%}
+        {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
+      {% when 4 %}
+        {%- assign max_height = 250 -%}
+        {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+      {% when 5 %}
+        {%- assign max_height = 195 -%}
+        {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
+    {% endcase %}
+
+    {%- assign product_limit = section.settings.grid | times: 2 -%}
+
+    <div class="grid grid--uniform grid--view-items">
+      {% for product in collection.products limit: product_limit %}
+        {% if forloop.index > 3 and forloop.index < 7 %}
+          <div class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
+            {% include 'product-card-grid', max_height: max_height %}
+          </div>
+        {% else %}
+          {% continue %}
+        {% endif %}
+      {% else %}
+
+        {% for i in (1..product_limit) %}
+          <div class="grid__item .grid__item--{{section.id}} {{ grid_item_width }}">
+            <div class="grid-view-item">
+              <a href="#" class="grid-view-item__link">
+                <div class="grid-view-item__image">
+                  {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                  {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+                <div class="h4 grid-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
+                <div class="grid-view-item__meta">
+                  {% include 'product-price' %}
+                </div>
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- FEATURE ROW 3 -->
+<div class="shopify-section index-section">
+  <div class="page-width feature-row">
+    {% capture image_layout %}
+      <div class="feature-row__item">
+        {% if section.settings.image_3 != blank %}
+          {% capture img_id %}FeatureRowImage-{{ section.id }}{% endcapture %}
+          {% capture wrapper_id %}FeatureRowImageWrapper-{{ section.id }}{% endcapture %}
+          {%- assign img_url = section.settings.image_3 | img_url: '1x1' | replace: '_3x1.', '_{width}x.' -%}
+          {% include 'image-style' with image: section.settings.image_3, width: 545, height: 545, small_style: true, wrapper_id: wrapper_id, img_id: img_id %}
+          <div id="{{ wrapper_id }}" class="feature-row__image-wrapper js">
+            <div style="padding-top:{{ 1 | divided_by: section.settings.image_3.aspect_ratio | times: 100}}%;">
+              <img id="{{ img_id }}"
+                   class="feature-row__image"
+                   src="{{ section.settings.image_3 | img_url: '900x' }}"
+                   data-src="{{ img_url }}"
+                   data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                   data-aspectratio="{{ section.settings.image_3.aspect_ratio }}"
+                   data-sizes="auto"
+                   alt="{{ section.settings.image_3.alt | escape }}">
+            </div>
+          </div>
+
+          <noscript>
+            {{ section.settings.image_3 | img_url: '600x600', scale: 2 | img_tag: section.settings.image_3.alt, 'feature-row__image' }}
+          </noscript>
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+    {% endcapture %}
+
+    <div class="feature-row">
+      {% if section.settings.layout_3 == 'left' %}
+        {{ image_layout }}
+      {% endif %}
+
+      <div class="feature-row__item feature-row__text feature-row__text--{{ section.settings.layout_3 }}">
+        {% if section.settings.title_3 != blank %}
+          <h2 class="h3">{{ section.settings.title_3 | escape }}</h2>
+        {% endif %}
+        {% if section.settings.text_3 != blank %}
+          <div class="rte-setting featured-row__subtext">{{ section.settings.text_3 }}</div>
+        {% endif %}
+        {% if section.settings.button_label_3 != blank and section.settings.button_link_3 != blank %}
+          <a href="{{ section.settings.button_link_3 }}" class="btn">
+            {{ section.settings.button_label_3 | escape }}
+          </a>
+        {% endif %}
+      </div>
+
+      {% if section.settings.layout_3 == 'right' %}
+        {{ image_layout }}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- COLLECTION 3 -->
+<div class="shopify-section index-section">
+  <div class="page-width">
+    {% if section.settings.collection_title != blank %}
+      <div class="section-header text-center">
+        <h2>{{ section.settings.collection_title | escape }}</h2>
+      </div>
+    {% endif %}
+
+    {%- assign collection = collections[section.settings.collection] -%}
+
+    {% case section.settings.grid %}
+      {% when 2 %}
+        {%- assign max_height = 530 -%}
+        {%- assign grid_item_width = 'medium-up--one-half' -%}
+      {% when 3 %}
+        {%- assign max_height = 345 -%}
+        {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
+      {% when 4 %}
+        {%- assign max_height = 250 -%}
+        {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+      {% when 5 %}
+        {%- assign max_height = 195 -%}
+        {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
+    {% endcase %}
+
+    {%- assign product_limit = section.settings.grid | times: section.settings.rows -%}
+
+    <div class="grid grid--uniform grid--view-items">
+      {% for product in collection.products limit: product_limit %}
+        {% if forloop.index > 6 %}
+          <div class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
+            {% include 'product-card-grid', max_height: max_height %}
+          </div>
+        {% else %}
+          {% continue %}
+        {% endif %}
+      {% else %}
+
+        {% for i in (1..product_limit) %}
+          <div class="grid__item .grid__item--{{section.id}} {{ grid_item_width }}">
+            <div class="grid-view-item">
+              <a href="#" class="grid-view-item__link">
+                <div class="grid-view-item__image">
+                  {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                  {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+                <div class="h4 grid-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
+                <div class="grid-view-item__meta">
+                  {% include 'product-price' %}
+                </div>
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.show_view_all %}
+      <hr class="hr--invisible"></hr>
+      <div class="text-center">
+        <a href="{{ collection.url }}" class="btn">
+          {{ 'collections.general.view_all' | t }}
+        </a>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Artist Page",
+    "class": "index-section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "COLLECTIONS Show product vendors",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "collection_title",
+        "label": "COLLECTION Heading",
+        "default": "Featured collection"
+      },
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "COLLECTION Collection"
+      },
+      {
+        "type": "range",
+        "id": "grid",
+        "label": "COLLECTION Products per row",
+        "min": 2,
+        "max": 5,
+        "step": 1,
+        "default": 3
+      },
+      {
+        "type": "range",
+        "id": "rows",
+        "label": "COLLECTION Rows",
+        "min": 3,
+        "max": 20,
+        "step": 1,
+        "default": 19
+      },
+      {
+        "type": "checkbox",
+        "id": "show_view_all",
+        "label": "COLLECTION Show 'View all' button",
+        "default": false
+      },
+      {
+        "type": "image_picker",
+        "id": "image_1",
+        "label": "FEATURE Image 1"
+      },
+      {
+        "type": "select",
+        "id": "layout_1",
+        "label": "FEATURE Image alignment 1",
+        "default": "right",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "title_1",
+        "label": "FEATURE Heading 1",
+        "default": "Image with text"
+      },
+      {
+        "type": "richtext",
+        "id": "text_1",
+        "label": "FEATURE Text 1",
+        "default": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+      },
+      {
+        "type": "text",
+        "id": "button_label_1",
+        "label": "FEATURE Button label 1"
+      },
+      {
+        "type": "url",
+        "id": "button_link_1",
+        "label": "FEATURE Button link 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_2",
+        "label": "FEATURE Image 2"
+      },
+      {
+        "type": "select",
+        "id": "layout_2",
+        "label": "FEATURE Image alignment 2",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "title_2",
+        "label": "FEATURE Heading 2",
+        "default": "Image with text"
+      },
+      {
+        "type": "richtext",
+        "id": "text_2",
+        "label": "FEATURE Text 2",
+        "default": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+      },
+      {
+        "type": "text",
+        "id": "button_label_2",
+        "label": "FEATURE Button label 2"
+      },
+      {
+        "type": "url",
+        "id": "button_link_2",
+        "label": "FEATURE Button link 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_3",
+        "label": "FEATURE Image 3"
+      },
+      {
+        "type": "select",
+        "id": "layout_3",
+        "label": "FEATURE Image alignment 3",
+        "default": "right",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "title_3",
+        "label": "FEATURE Heading 3",
+        "default": "Image with text"
+      },
+      {
+        "type": "richtext",
+        "id": "text_3",
+        "label": "FEATURE Text 3",
+        "default": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+      },
+      {
+        "type": "text",
+        "id": "button_label_3",
+        "label": "FEATURE Button label 3"
+      },
+      {
+        "type": "url",
+        "id": "button_link_3",
+        "label": "FEATURE Button link 3"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Artist Page Template",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}

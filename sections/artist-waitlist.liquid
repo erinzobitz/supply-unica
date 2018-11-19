@@ -1,0 +1,107 @@
+{% if section.settings.message %}
+  <style>
+    .artist-notification-bar {
+      background-color: {{ section.settings.color_bg }};
+    }
+
+    .artist-notification-bar__message {
+      color: {{ section.settings.color_text }};
+      margin: 0;
+      font-size: 1em;
+      padding: 19px 8px 8px 8px;
+    }
+  </style>
+{% endif %}
+
+{% if section.settings.message %}
+  <style>
+    .artist-announcement-bar {
+      background-color: {{ section.settings.color_bg }};
+      padding: 0 15px;
+    }
+
+    .artist-announcement-bar--link:hover {
+      {% assign brightness = section.settings.color_bg | color_brightness %}
+
+      {% if brightness <= 192 %}
+        {% assign lightenAmount = 255 | minus: brightness | divided_by: 255 | times: 16 %}
+        background-color: {{ section.settings.color_bg | color_lighten: lightenAmount }};
+      {% else %}
+        {% assign darkenAmount = 255 | divided_by: brightness | times: 8 %}
+        background-color: {{ section.settings.color_bg | color_darken: darkenAmount }};
+      {% endif %}
+    }
+
+    .artist-announcement-bar__message {
+      color: {{ section.settings.color_text }};
+      margin: 0;
+      font-size: 1em;
+      padding: 19px 8px 8px 8px;
+    }
+  </style>
+
+  <div class="page-width">
+    <div class="artist-announcement-bar">
+        <!-- Begin MailChimp Signup Form -->
+        <form action="{{ section.settings.action_url }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate contact-form" target="_blank" novalidate>
+          <p class="artist-announcement-bar__message announcement-bar__message text-center">{{ section.settings.message_text | escape }}</p>
+          <div class="input-group password__input-group" style="padding-bottom:19px;margin:0 auto 19px;">
+            <input type="email" placeholder="Email address" name="EMAIL" class="input-group__field newsletter__input" id="mce-EMAIL">
+            <span class="input-group__btn">
+              <button type="submit" value="Get Notified" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter__submit">
+                <span class="newsletter__submit-text--large">Get Notified</span>
+              </button>
+            </span>
+            <div id="mce-responses" class="clear">
+              <div class="response" id="mce-error-response" style="display:none"></div>
+              <div class="response" id="mce-success-response" style="display:none"></div>
+            </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1bea10f9b47f8542c8bb2336a_196bf08e1a" tabindex="-1" value=""></div>
+            </div>
+        </form>
+        <!--End mc_embed_signup-->
+    </div>
+  </div>
+{% endif %}
+
+
+{% schema %}
+  {
+    "name": "Announcement",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Announcement bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "message",
+        "label": "Show announcement",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "message_text",
+        "label": "Announcement text",
+        "default": "Announce something here"
+      },
+      {
+        "type": "url",
+        "id": "action_url",
+        "label": "Mailchimp URL"
+      },
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Bar",
+        "default": "#788188"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text",
+        "default": "#fff"
+      }
+    ]
+  }
+{% endschema %}
