@@ -1,3 +1,21 @@
+// Supply Unica Fonts
+@font-face {
+  font-family: 'SofiaPro Light', sofia-pro, sans-serif;
+  src: url('./fonts/SofiaProLight.otf');
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'SofiaPro', sofia-pro, sans-serif;
+  src: url('./fonts/SofiaProRegular.otf');
+  font-style: normal;
+  font-weight: 400;
+}
+
+$su-font: 'SofiaPro', sofia-pro, sans-serif;
+$su-font-light: 'SofiaPro Light', sofia-pro, sans-serif;
+
 /*============================================================================
   Debut | Built with Shopify Slate
 
@@ -302,7 +320,7 @@ $grid-breakpoint-has-push: ($small, $medium-up);
 
 /*================ Color Variables ================*/
 
-// Supply Unica colors
+// Supply Unica Colors
 $white: #FFFFFF;
 $light-gray: #F0EAEB;
 $medium-gray: #E2DAD7;
@@ -422,12 +440,12 @@ $font-weight-light: 300; /* Added by Marcus */
 $font-weight-normal: 400;
 $font-weight-bold: 700;
 
-$font-stack-header: {{ header_family }};
+$font-stack-header: $su-font;
 $font-weight-header: {{ header_weight }};
 $font-size-header: {{ settings.type_header_base_size }};
 $font-bold-titles: {{ settings.type_bold_product_titles }};
 
-$font-stack-body: {{ base_family }};
+$font-stack-body: $su-font;
 $font-size-base: {{ settings.type_base_size }}; // Henseforth known as 1em
 
 $font-stack-cart-notification: "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
