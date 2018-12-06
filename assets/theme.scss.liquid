@@ -2277,9 +2277,6 @@ $dropdown-padding: 11px 17px;
   position: relative;
   padding: 0;
   text-align: center;
-  margin: 25px 0;
-
-
 
   a {
     padding: 3px 30px 3px 0;
@@ -3760,7 +3757,7 @@ h1.product-single__title {
 .site-header__container {
   max-width: 1440px;
   margin: 0 auto;
-  padding-top: 25px;
+  padding: 35px 0 25px 0;
 }
 
 .site-header__container--small {
@@ -3773,6 +3770,11 @@ h1.product-single__title {
   display: flex;
   height: 100%;
   justify-content: space-between;
+}
+
+.site-header__row-item--top {
+  display: flex;
+  align-items: flex-start;
 }
 
 .site-header__row-item {
@@ -3793,47 +3795,26 @@ h1.product-single__title {
   }
 }
 
-.site-header__logo {
-  img {
-    display: block;
-  }
-}
-
-.site-header__logo {
-  margin: 12px 0;
-
-  .logo-align--center & {
-    text-align: center;
-    margin: 0 auto;
-
-    @include media-query($small) {
-      text-align: left;
-      margin: 15px 0;
+.site-header__nav-item--with-link {
+  &:hover {
+    path {
+      fill: $color-text-hover;
     }
   }
 }
 
-.site-header__logo-link {
-  display: inline-block;
-  word-break: break-word;
-}
+.site-header__logo {
+  padding-top: 3px;
+  font-family: $su-font-bold;
+  font-size: 24px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 
-.site-header__logo-image {
-  display: block;
-  max-width: 125px;
-
-  @include media-query($medium-up) {
-    margin: 0 auto;
-    max-width: 100%;
+  @include media-query($small) {
+    margin: 0;
+    padding-left: 22px;
+    font-size: 16px;
   }
-}
-
-.site-header__logo-image img {
-  width: 100%;
-}
-
-.site-header__logo-image--centered img {
-  margin: 0 auto;
 }
 
 @include media-query($medium-up) {
@@ -3951,10 +3932,6 @@ h1.product-single__title {
 
 
 @include media-query($small) {
-  .site-header__logo {
-    padding-left: $gutter-site-mobile;
-  }
-
   .site-header__icons {
     padding-right: $gutter-site-mobile;
   }
@@ -3970,14 +3947,6 @@ h1.product-single__title {
 
     .site-header__icons--plus & {
       padding: 18px 6px;
-    }
-  }
-
-  .site-header__logo {
-    text-align: left;
-
-    img {
-      margin: 0;
     }
   }
 }
