@@ -1,4 +1,4 @@
-<ul class="site-nav list--inline {{ nav_alignment }}" id="SiteNav">
+<ul class="site-nav list--inline--top {{ nav_alignment }}" id="SiteNav">
   {% for link in linklists[section.settings.main_linklist].links %}
     {% comment %}
       Check if third-level nav exists on each parent link.
@@ -17,13 +17,11 @@
 
     {% if linklists[child_list_handle].links != blank %}
       <li class="site-nav--has-dropdown{% if three_level_nav %} site-nav--has-centered-dropdown{% endif %}{% if link.active %} site-nav--active{% endif %}" aria-has-popup="true" aria-controls="SiteNavLabel-{{ child_list_handle }}">
-        <a href="{{ link.url }}" class="site-nav__link site-nav__link--main">
+        <div href="{{ link.url }}" class="site-nav__section-header">
           {{ link.title }}
-          {% include 'icon-chevron-down' %}
-          <span class="visually-hidden">{{ 'layout.navigation.expand' | t }}</span>
-        </a>
+        </div>
 
-        <div class="site-nav__dropdown{% if three_level_nav %} site-nav__dropdown--centered{% endif %}" id="SiteNavLabel-{{ child_list_handle }}" aria-expanded="false">
+        <div class="site-nav__dropdown">
           {% if three_level_nav %}
             <div class="site-nav__childlist">
               <div class="site-nav__childlist-grid">
@@ -58,7 +56,7 @@
       </li>
     {% else %}
       <li {% if link.active %}class="site-nav--active"{% endif %}>
-        <a href="{{ link.url }}" class="site-nav__link site-nav__link--main">{{ link.title }}</a>
+        <div class="site-nav__section-header">{{ link.title }}</div>
       </li>
     {% endif %}
   {% endfor %}

@@ -964,13 +964,14 @@ theme.MobileNav = (function() {
 
   function openMobileNav() {
     var translateHeaderHeight = cache.$siteHeader.outerHeight() + cache.$siteHeader.offset().top;
+    $("header").addClass("site-header--expanded");
 
     cache.$mobileNavContainer
       .prepareTransition()
       .addClass(classes.navOpen);
 
     cache.$mobileNavContainer.css({
-      transform: 'translate3d(0, ' + translateHeaderHeight + 'px, 0)'
+      transform: 'translate3d(0, -1px, 0)'
     });
     cache.$pageContainer.css({
       transform: 'translate3d(0, ' + cache.$mobileNavContainer[0].scrollHeight + 'px, 0)'
@@ -995,6 +996,7 @@ theme.MobileNav = (function() {
 
   function closeMobileNav() {
     cache.$mobileNavContainer.prepareTransition().removeClass(classes.navOpen);
+    $("header").removeClass("site-header--expanded");
 
     cache.$mobileNavContainer.css({
       transform: 'translate3d(0, -100%, 0)'
