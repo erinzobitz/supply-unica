@@ -1,35 +1,31 @@
-<div class="page-width">
-  {% if section.settings.title != blank %}
-    <div class="section-header text-center">
-      <h2>{{ section.settings.title | escape }}</h2>
-    </div>
-  {% endif %}
+<div class="section-container">
+  <div class="page-width">
+    <div class="page-subheader">Artists</div>
+    <h1 class="page-header">Our artist strive to create something of quality.</h1>
 
-  {% case section.settings.grid %}
-    {% when 2 %}
-      {%- assign grid_item_width = 'medium-up--one-half' -%}
-    {% when 3 %}
-      {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
-    {% when 4 %}
-      {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
-    {% when 5 %}
-      {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
-  {% endcase %}
-
-  <div class="collection-grid">
-    <div class="grid grid--uniform">
+    <div class="space--mt--large">
       {% for block in section.blocks limit: section.blocks.size %}
-        <div class="grid__item {{ grid_item_width }}" {{ block.shopify_attributes }}>
-          {%- assign collection = collections[block.settings.collection] -%}
-          {% include 'collection-grid-item' %}
+        {%- assign collection = collections[block.settings.collection] -%}
+        <h3>
+          <a class="collection-list__link--with-image"
+             href="{{ collection.url }}">{{ collection.title }}
+          </a>
+        </h3>
+
+        {% if collection.image %}
+          {%- assign collection_image = collection.image -%}
+        {% elsif collection.products.first and collection.products.first.images != empty %}
+          {%- assign collection_image = collection.products.first.featured_image -%}
+        {% else %}
+          {% assign collection_image = blank %}
+        {% endif %}
+
+        <div class="collection-list__image-preview"
+             style="background-image: url('{{ collection_image | img_url: '300x300' }}')">
         </div>
       {% endfor %}
     </div>
   </div>
-
-  {% if section.blocks.size == 0 %}
-    {% include 'no-blocks' %}
-  {% endif %}
 </div>
 
 {% schema %}

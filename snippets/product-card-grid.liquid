@@ -33,11 +33,8 @@
         <img class="grid-view-item__image" src="{{ product.featured_image.src | img_url: image_size, scale: 2 }}" alt="{{ product.featured_image.alt }}" style="max-width: {{ max_height | times: product.featured_image.aspect_ratio }}px;">
         <img class="hidden" src="{{ product.images[1].src | img_url: image_size, scale: 2 }}" alt="{{ product.featured_image.alt }}" style="max-width: {{ max_height | times: product.featured_image.aspect_ratio }}px;">
     </noscript>
-
-    <div class="h4 grid-view-item__title">{{ product.title }}</div>
-    {% if section.settings.show_vendor %}
-      <div class="grid-view-item__vendor">{{ product.vendor }}</div>
-    {% endif %}
+    <div class="grid-view-item__vendor">{{ product.vendor }}</div>
+    <div class="grid-view-item__title">{{ product.title }}</div>
     <div class="grid-view-item__meta">
       {% include 'product-price' %}
     </div>

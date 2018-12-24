@@ -311,12 +311,12 @@ $brown: #67351C;
 $black: #232121;
 
 $expanded-header-color: $beige;
+$expanded-header-color-text: $black;
+$expanded-header-color-text-hover: $black;
 
 // Text colors
 $color-text: $black;
 $color-text-hover: $beige;
-$expanded-header-color-text: $black;
-$expanded-header-color-text-hover: $black;
 $color-text-shadow: rgba(0, 0, 0, 0.1);
 $color-body-text: {{ settings.color_body_text }};
 $color-sale-text: {{ settings.color_sale_text }};
@@ -336,7 +336,7 @@ $opacity-link-hover: 0.6;
 $transition-link-hover: 0.1s cubic-bezier(0.44, 0.13, 0.48, 0.87);
 
 // Backgrounds
-$color-body: {{ settings.color_body_bg }};
+$color-body: $light-gray;
 $color-bg: {{ settings.color_body_bg }};
 $color-drawer-background: rgba(0, 0, 0, 0.6);
 $color-bg-alt: {{ settings.color_body_text | color_modify: 'alpha', 0.05 }};
@@ -378,6 +378,7 @@ $gutter-site: 55px;
 $gutter-site-mobile: 22px;
 $section-spacing: 55px;
 $section-spacing-small: 35px;
+$section-spacing-large: 75px;
 $border-radius: 2px;
 
 /*================ Z-Index ================*/
@@ -427,6 +428,10 @@ $transition-image-slideshow: opacity 0.8s cubic-bezier(0.44, 0.13, 0.48, 0.87);
 $su-font: SofiaProRegular;
 $su-font-bold: SofiaPro-Bold;
 $su-font-light: SofiaProLight;
+
+$font-size-base: 16px;
+$font-size--small: 14px;
+$font-size--xsmall: 12px;
 
 $font-weight-light: 300; /* Added by Marcus */
 $font-weight-normal: 400;
@@ -1228,16 +1233,20 @@ html {
   margin: 0 auto;
 }
 
+.page-header {
+  max-width: 450px;
+  line-height: 1.2;
+}
+
+.page-subheader {
+  margin-bottom: 15px;
+  font-size: $font-size--small;
+}
+
 .main-content {
   display: block;
   padding-top: $section-spacing-small;
-
-  @include media-query($medium-up) {
-    padding-top: $section-spacing;
-  }
 }
-
-.main-content
 
 .section-header {
   margin-bottom: $section-spacing-small;
@@ -1247,6 +1256,16 @@ html {
   @include media-query($medium-up) {
     margin-bottom: $section-spacing;
   }
+}
+
+.section-container {
+  margin-top: 45px;
+  margin-bottom: 75px;
+}
+
+/*================ Spacers ================*/
+.space--mt--large {
+  margin-top: $section-spacing-large;
 }
 
 /*================ Typography ================*/
@@ -1333,17 +1352,17 @@ h6 {
 }
 
 h1 {
-  font-size: em(floor($font-size-header * 1.35));
+  font-size: 40px;
   text-transform: none;
   letter-spacing: -1px;
 
   @include media-query($small) {
-    font-size: em(floor($font-size-header * 1.25));
+    font-size: 32px;
   }
 }
 
 h2 {
-  font-size: em(floor($font-size-header * 0.68));
+  font-size: 32px;
   text-transform: none;
   font-family: $font-stack-body; /* Added by Marcus */
   /* Removed by Marcus
@@ -1356,7 +1375,7 @@ h2 {
 }
 
 h3 {
-  font-size: em($font-size-header);
+  font-size: 24px;
   text-transform: none;
   letter-spacing: -1px;
 
@@ -1912,7 +1931,7 @@ td {
       content: attr(data-label);
       float: left;
       text-align: center;
-      font-size: 12px;
+      font-size: $font-size--xsmall;
       padding-right: 10px;
     }
   }
@@ -2317,7 +2336,12 @@ $dropdown-padding: 11px 17px;
 
     .site-nav__dropdown {
       .site-nav__link {
+        font-size: 16px;
         padding: 5px 30px 5px 0;
+
+        &:hover {
+          color: $expanded-header-color-text-hover;
+        }
       }
     }
   }
@@ -2351,7 +2375,7 @@ $dropdown-padding: 11px 17px;
 
 .site-nav__section-header {
   color: $brown;
-  font-size: 14px;
+  font-size: $font-size--small;
   padding: 3px 30px 3px 0;
 }
 
@@ -2665,29 +2689,13 @@ hr {
 .grid-view-item__title {
   margin-bottom: 0;
   color: $color-text;
-  font-size: em($font-size-base * 1.25);
-  font-family: $font-stack-header; /* Added by Marcus
-
-  @if $font-bold-titles {
-    font-weight: $font-weight-bold;
-  }
-  */
-}
-
-.grid-view-item__meta {
-  margin-top: 8px;
-}
-
-@include media-query($small) {
-  .grid-view-item__title,
-  .grid-view-item__meta {
-    font-size: em($font-size-base - 1px);
-  }
+  font-size: $font-size-base;
+  line-height: 1.4;
 }
 
 .product-price__price {
   display: inline-block;
-  color: $color-body-text;
+  font-size: $font-size-base;
   font-weight: $font-weight-normal;
 }
 
@@ -2697,18 +2705,17 @@ hr {
 
 .grid-view-item__link {
   display: block;
+
+  &:hover {
+    color: $black;
+  }
 }
 
 .grid-view-item__vendor {
-  margin-top: 4px;
-  color: $color-body-text;
-  font-size: em($font-size-base - 2px);
-  text-transform: uppercase;
-  font-weight: $font-weight-light; /* Added by Marcus */
-
-  @include media-query($small) {
-    font-size: em($font-size-base - 3px);
-  }
+  margin: 4px 0;
+  color: $brown;
+  font-size: $font-size--xsmall;
+  line-height: 1.2;
 }
 
 .grid-view-item__image-wrapper {
@@ -3849,7 +3856,7 @@ h1.product-single__title {
 
 .site-header__links-wrapper--small {
   & > * {
-    font-size: 14px;
+    font-size: $font-size--small;
     padding: 3px 0 3px 30px;
   }
 }
@@ -3871,7 +3878,7 @@ h1.product-single__title {
 
   @include media-query($small) {
     margin: 0;
-    padding-left: 22px;
+    padding-left: 35px;
     font-size: 16px;
   }
 }
@@ -3982,7 +3989,7 @@ h1.product-single__title {
 
     span {
       padding: 4px 6px;
-      font-size: 12px;
+      font-size: $font-size--xsmall;
     }
   }
 }
@@ -5838,6 +5845,18 @@ $toolbar-height-small: 46px;
   text-align: center;
 }
 
+.collection-header__description {
+  font-size: 20px;
+  line-height: 1.4;
+  max-width: 540px;
+}
+
+.collection-header__count {
+  top: -1.7em;
+  line-height: 1.4;
+  font-size: $font-size--small;
+}
+
 .collection-grid {
   margin-bottom: -$gutter-site-mobile;
   overflow: auto;
@@ -5909,6 +5928,22 @@ $toolbar-height-small: 46px;
   left: 0;
   background-color: $color-image-overlay;
   opacity: $opacity-image-overlay;
+}
+
+.collection-list__image-preview {
+  display: none;
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  right: 100px;
+  top: 300px;
+}
+
+.collection-list__link--with-image {
+  &:hover {
+    color: $brown;
+    text-decoration: underline;
+  }
 }
 
 .custom-content {
