@@ -2,15 +2,15 @@ $(document).ready(function() {
   $("#shop-link").click(function(event) {
     event.preventDefault();
 
-    var expandedHeader = $("header").hasClass("site-header--expanded");
+    var expandedHeader = $(".site-header").hasClass("site-header--expanded");
 
     if (!expandedHeader) {
       $(".site-header__site-nav").slideDown("fast");
-      $("header").addClass("site-header--expanded");
+      $(".site-header").addClass("site-header--expanded");
       $(this).blur();
     } else {
       $(".site-header__site-nav").slideUp("fast");
-      $("header").removeClass("site-header--expanded");
+      $(".site-header").removeClass("site-header--expanded");
       $(this).blur();
     }
   });

@@ -928,6 +928,7 @@ theme.MobileNav = (function() {
   var menuLevel = 1;
   // Breakpoints from src/stylesheets/global/variables.scss.liquid
   var mediaQuerySmall = 'screen and (max-width: 749px)';
+  var mediaQueryMediumUp = 'screen and (min-width: 750px)';
 
   function init() {
     cacheSelectors();
@@ -939,6 +940,14 @@ theme.MobileNav = (function() {
     enquire.register(mediaQuerySmall, {
       unmatch: function() {
         closeMobileNav();
+        $(".site-header").removeClass("site-header--expanded");
+      }
+    });
+
+    enquire.register(mediaQueryMediumUp, {
+      unmatch: function() {
+        $(".site-header__site-nav").css("display", "none");
+        $(".site-header").removeClass("site-header--expanded");
       }
     });
   }
@@ -964,7 +973,7 @@ theme.MobileNav = (function() {
 
   function openMobileNav() {
     var translateHeaderHeight = cache.$siteHeader.outerHeight() + cache.$siteHeader.offset().top;
-    $("header").addClass("site-header--expanded");
+    $(".site-header").addClass("site-header--expanded");
 
     cache.$mobileNavContainer
       .prepareTransition()
@@ -974,7 +983,7 @@ theme.MobileNav = (function() {
       transform: 'translate3d(0, -1px, 0)'
     });
     cache.$pageContainer.css({
-      transform: 'translate3d(0, ' + cache.$mobileNavContainer[0].scrollHeight + 'px, 0)'
+      transform: 'translate3d(0, -1px, 0)'
     });
 
     slate.a11y.trapFocus({
@@ -996,11 +1005,12 @@ theme.MobileNav = (function() {
 
   function closeMobileNav() {
     cache.$mobileNavContainer.prepareTransition().removeClass(classes.navOpen);
-    $("header").removeClass("site-header--expanded");
+    $(".site-header").removeClass("site-header--expanded");
 
     cache.$mobileNavContainer.css({
       transform: 'translate3d(0, -100%, 0)'
     });
+
     cache.$pageContainer.removeAttr('style');
 
     cache.$mobileNavContainer.one('TransitionEnd.navToggle webkitTransitionEnd.navToggle transitionend.navToggle oTransitionEnd.navToggle', function() {
@@ -1009,6 +1019,9 @@ theme.MobileNav = (function() {
         namespace: 'navFocus'
       });
     });
+
+    cache.$mobileNavContainer
+      .removeClass('is-transitioning');
 
     cache.$mobileNavToggle
       .addClass(classes.mobileNavOpenIcon)
