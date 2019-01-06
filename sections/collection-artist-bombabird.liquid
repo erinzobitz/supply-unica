@@ -1,44 +1,40 @@
+<!-- INTERVIEW -->
+<div class="interview-overlay interview-overlay--from-right js-interview-overlay-main">
+  <div class="interview-overlay__container">
+    <div class="interview-overlay__content">
+      <a href="#0" class="interview-overlay__close js-interview-overlay-close">
+        {% include 'icon-close' %}
+      </a>
+      {% if section.settings.custom-title != blank %}
+        <div class="interview-overlay__header">
+          <div class="">Interview with</div>
+          <h1>{{ section.settings.custom-title | escape }}</h1>
+        </div>
+      {% endif %}
+      {% for block in section.blocks %}
+        <div class="rte-setting">{{ block.settings.custom-text }}</div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
 <div class="shopify-section index-section artist-section">
   <div class="feature-row__header">
-    {% capture image_layout %}
-      <div class="feature-row__item">
-        {% if section.settings.image_1 != blank %}
-          {% capture img_id %}FeatureRowImage-{{ section.id }}{% endcapture %}
-          {% capture wrapper_id %}FeatureRowImageWrapper-{{ section.id }}{% endcapture %}
-          {%- assign img_url = section.settings.image_1 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-          {% include 'image-style' with image: section.settings.image_1, width: 545, height: 545, small_style: true, wrapper_id: wrapper_id, img_id: img_id %}
-          <div id="{{ wrapper_id }}" class="feature-row__image-wrapper js">
-            <div style="padding-top:{{ 1 | divided_by: section.settings.image_1.aspect_ratio | times: 100}}%;">
-              <img id="{{ img_id }}"
-                   class="feature-row__image"
-                   src="{{ section.settings.image_1 | img_url: '900x' }}"
-                   data-src="{{ img_url }}"
-                   data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
-                   data-aspectratio="{{ section.settings.image_1.aspect_ratio }}"
-                   data-sizes="auto"
-                   alt="{{ section.settings.image_1.alt | escape }}">
-            </div>
-          </div>
-
-          <noscript>
-            {{ section.settings.image_1 | img_url: '600x600', scale: 2 | img_tag: section.settings.image_1.alt, 'feature-row__image' }}
-          </noscript>
-        {% else %}
-          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-        {% endif %}
-      </div>
-    {% endcapture %}
-
     <div class="feature-row">
       <div class="feature-row__item feature-row__text__text-box">
         <h1>{{ section.settings.title_1 | escape }}</h1>
-        <div class="feature-row__text__link">
-          <a class="link--secondary" href="#">View Bio +</a>
-        </div>
+        {% if true %}
+          <div class="feature-row__text__link">
+            <a class="js-interview-overlay-open link--secondary" href="#">View Bio +</a>
+          </div>
+        {% endif %}
         <h3 class="feature-row__text__quote">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</h3>
         <div class="feature-row__text__subtext font--small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</div>
       </div>
-      {{ image_layout }}
+      <div class="feature-row__hero-image__container feature-row__item">
+        <img class="feature-row__hero-image" src="{{ section.settings.image_1 | img_url: '900x' }}">
+      </div>
     </div>
   </div>
 </div>

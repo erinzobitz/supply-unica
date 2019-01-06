@@ -5395,13 +5395,13 @@ $toolbar-height-small: 46px;
 
 .feature-row__text__text-box {
   flex: 1 0 50%;
-  padding-left: 55px;
   max-width: 600px;
-  padding-top: $section-spacing-large;
+  padding: $section-spacing-large 55px $section-spacing-small 55px;
   margin-left: auto;
 
   @include media-query($small) {
-    padding-bottom: $section-spacing-small;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
 
@@ -5429,6 +5429,24 @@ $toolbar-height-small: 46px;
 .feature-row__text__subtext {
   max-width: 340px;
   line-height: $standard-line-height;
+}
+
+.feature-row__hero-image__container {
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 600px;
+
+  @include media-query($small) {
+    display: block;
+  }
+}
+
+.feature-row__hero-image {
+  object-fit: cover;
+
+  @include media-query($small) {
+    margin-bottom: -7px;
+  }
 }
 
 .feature-row__item {
@@ -5477,6 +5495,65 @@ $toolbar-height-small: 46px;
   position: absolute;
   bottom: 0;
   max-width: 192px;
+
+  & > * {
+    color: $color-text;
+  }
+}
+
+.interview-overlay {
+  visibility: hidden;
+  transition: visibility 0s 0.6s;
+}
+
+.interview-overlay.interview-overlay--is-visible {
+  visibility: visible;
+  transition: visibility 0s 0s;
+}
+
+.interview-overlay__container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  transition: transform 0.3s 0.3s;
+  z-index: 10;
+  background-color: rgba(226,218,215,.8);
+}
+
+.interview-overlay--from-right .interview-overlay__container {
+  right: 0;
+  transform: translate3d(100%, 0, 0);
+}
+
+.interview-overlay--is-visible .interview-overlay__container {
+  transform: translate3d(0, 0, 0);
+  transition-delay: 0s;
+}
+
+.interview-overlay__content {
+  width: 50%;
+  float: right;
+  padding: $section-spacing-large;
+  background-color: $medium-gray;
+  height: 100%;
+
+  @include media-query($small) {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
+.interview-overlay__header {
+  padding-top: $section-spacing-small;
+}
+
+.interview-overlay__close {
+  margin-left: -50px;
+
+  @include media-query($small) {
+    margin-left: 0;
+  }
 }
 
 .hero {
