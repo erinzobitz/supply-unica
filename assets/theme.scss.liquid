@@ -2984,6 +2984,20 @@ $slick-dot-size-small: 10px;
   }
 }
 
+.index-section--extra {
+  background-color: $medium-gray;
+  padding-top: 100px;
+  padding-bottom: 190px;
+
+  @include media-query($small) {
+    padding-top: $section-spacing-large;
+  }
+}
+
+.index-section--extra--with-grid {
+  padding-bottom: 225px;
+}
+
 .index-section--flush + .index-section--flush {
   margin-top: -($section-spacing-small);
 }
@@ -5553,6 +5567,20 @@ $toolbar-height-small: 46px;
 
   @include media-query($small) {
     margin-left: 0;
+  }
+}
+
+.about-us {
+  background-color: $medium-gray;
+}
+
+.about-us__text-container {
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 180px 0 120px 0;
+
+  & > * {
+    line-height: $standard-line-height;
   }
 }
 
