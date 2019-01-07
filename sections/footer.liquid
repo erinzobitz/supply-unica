@@ -6,6 +6,7 @@
         {%- assign footer_linklist = section.settings.footer_linklist -%}
         {% if linklists[footer_linklist].links.size > 0 %}
           <ul class="site-footer__linklist">
+            <li class="site-footer__list-header">Supply Unica</li>
             {% for link in linklists[footer_linklist].links %}
               <li class="site-footer__linklist-item">
                 <a href="{{ link.url }}">{{ link.title }}</a>
@@ -57,8 +58,8 @@
                     autocapitalize="off">
                   <span class="input-group__btn">
                     <button type="submit" class="btn newsletter__submit" name="commit" id="Subscribe">
-                      <svg width="18" height="15" viewBox="0 0 18 15" fill="none">
-                        <path d="M17.7059 8.74863C18.0957 8.38104 18.0957 7.74787 17.7059 7.33442L11.3529 0.59675C10.9631 0.183294 10.331 0.146113 9.94113 0.513705C9.55128 0.881297 9.55128 1.51446 9.94113 1.92792L15.5882 7.91695L9.94113 13.2416C9.55128 13.6092 9.55128 14.2424 9.94113 14.6558C10.331 15.0693 10.9631 15.1065 11.3529 14.7389L17.7059 8.74863ZM0 8L17 9L17 7L0 6L0 8Z" fill="black"/>
+                      <svg width="20" height="17" viewBox="0 0 20 17" fill="none">
+                        <path d="M10.6092 15.0074L11.8574 16.2853L20 8.14264L11.8574 0L10.6092 1.27786L16.5825 7.25111H0V9.03418H16.5825L10.6092 15.0074Z" fill="#232121"/>
                       </svg>
                     </button>
                   </span>

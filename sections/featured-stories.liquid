@@ -1,0 +1,151 @@
+<div class="featured-stories">
+  <div class="page-width">
+    {% if section.settings.title != blank %}
+      <div class="section-header">
+        <div class="page-subheader">{{ section.settings.section-title | escape }}</div>
+        <h2>{{ section.settings.title | escape }}</h2>
+      </div>
+    {% endif %}
+    <div class="featured-stories__flex-container">
+      <div class="featured-stories__flex-item--half">
+        <img src="{{ section.settings.image_1 | img_url: '900x' }}">
+      </div>
+
+      <div class="featured-stories__flex-item--half featured-stories__text-container">
+        <h3>{{ section.settings.title_1 | escape }}</h3>
+        <div class="featured-stories__subtitle">{{ section.settings.subtitle_1 | escape }}</div>
+        <a class="link--secondary" href="{{ section.settings.link_1 }}">{{ section.settings.link-text_1 }}</a>
+      </div>
+    </div>
+
+    <div class="featured-stories__flex-container">
+      <div class="featured-stories__flex-item--third">
+        <img class="space--mb" src="{{ section.settings.image_2 | img_url: '900x' }}">
+        <h4>{{ section.settings.title_2 | escape }}</h4>
+        <a class="link--secondary" href="{{ section.settings.link_2 }}">{{ section.settings.link-text_2 }}</a>
+      </div>
+
+      <div class="featured-stories__flex-item--third">
+        <img class="space--mb" src="{{ section.settings.image_3 | img_url: '900x' }}">
+        <h4>{{ section.settings.title_3 | escape }}</h4>
+        <a class="link--secondary" href="{{ section.settings.link_3 }}">{{ section.settings.link-text_3 }}</a>
+      </div>
+
+      <div class="featured-stories__flex-item--third">
+        <img class="space--mb" src="{{ section.settings.image_4 | img_url: '900x' }}">
+        <h4>{{ section.settings.title_4 | escape }}</h4>
+        <a class="link--secondary" href="{{ section.settings.link_4 }}">{{ section.settings.link-text_4 }}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Featured Stories",
+    "class": "index-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "section-title",
+        "label": "Section Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_1",
+        "label": "Image 1"
+      },
+      {
+        "type": "text",
+        "id": "title_1",
+        "label": "Title 1"
+      },
+      {
+        "type": "text",
+        "id": "subtitle_1",
+        "label": "Subtitle 1"
+      },
+      {
+        "type": "text",
+        "id": "link-text_1",
+        "label": "Link Text 1"
+      },
+      {
+        "type": "url",
+        "id": "link_1",
+        "label": "Link 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_2",
+        "label": "Image 2"
+      },
+      {
+        "type": "text",
+        "id": "title_2",
+        "label": "Title 2"
+      },
+      {
+        "type": "text",
+        "id": "link-text_2",
+        "label": "Link Text 2"
+      },
+      {
+        "type": "url",
+        "id": "link_2",
+        "label": "Link 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_3",
+        "label": "Image 3"
+      },
+      {
+        "type": "text",
+        "id": "title_3",
+        "label": "Title 3"
+      },
+      {
+        "type": "text",
+        "id": "link-text_3",
+        "label": "Link Text 3"
+      },
+      {
+        "type": "url",
+        "id": "link_3",
+        "label": "Link 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_4",
+        "label": "Image 4"
+      },
+      {
+        "type": "text",
+        "id": "title_4",
+        "label": "Title 4"
+      },
+      {
+        "type": "text",
+        "id": "link-text_4",
+        "label": "Link Text 4"
+      },
+      {
+        "type": "url",
+        "id": "link_4",
+        "label": "Link 4"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Stories",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}
