@@ -6,32 +6,32 @@
         <h2>{{ section.settings.title | escape }}</h2>
       </div>
     {% endif %}
-    <div class="featured-stories__flex-container">
-      <div class="featured-stories__flex-item--half">
+    <div class="flex-container">
+      <div class="flex-item--half">
         <img src="{{ section.settings.image_1 | img_url: '900x' }}">
       </div>
 
-      <div class="featured-stories__flex-item--half featured-stories__text-container">
+      <div class="flex-item--half featured-stories__text-container">
         <h3>{{ section.settings.title_1 | escape }}</h3>
-        <div class="featured-stories__subtitle">{{ section.settings.subtitle_1 | escape }}</div>
+        <div class="featured-stories__subtitle text__subtitle">{{ section.settings.subtitle_1 | escape }}</div>
         <a class="link--secondary" href="{{ section.settings.link_1 }}">{{ section.settings.link-text_1 }}</a>
       </div>
     </div>
 
-    <div class="featured-stories__flex-container">
-      <div class="featured-stories__flex-item--third">
+    <div class="flex-container">
+      <div class="flex-item flex-item--one-third">
         <img class="space--mb" src="{{ section.settings.image_2 | img_url: '900x' }}">
         <h4>{{ section.settings.title_2 | escape }}</h4>
         <a class="link--secondary" href="{{ section.settings.link_2 }}">{{ section.settings.link-text_2 }}</a>
       </div>
 
-      <div class="featured-stories__flex-item--third">
+      <div class="flex-item flex-item--one-third">
         <img class="space--mb" src="{{ section.settings.image_3 | img_url: '900x' }}">
         <h4>{{ section.settings.title_3 | escape }}</h4>
         <a class="link--secondary" href="{{ section.settings.link_3 }}">{{ section.settings.link-text_3 }}</a>
       </div>
 
-      <div class="featured-stories__flex-item--third">
+      <div class="flex-item flex-item--one-third">
         <img class="space--mb" src="{{ section.settings.image_4 | img_url: '900x' }}">
         <h4>{{ section.settings.title_4 | escape }}</h4>
         <a class="link--secondary" href="{{ section.settings.link_4 }}">{{ section.settings.link-text_4 }}</a>

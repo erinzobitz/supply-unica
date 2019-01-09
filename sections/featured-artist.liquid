@@ -1,0 +1,108 @@
+<div class="featured-artist">
+  <div class="page-width">
+    {% if section.settings.title != blank %}
+      <div class="section-header">
+        <div class="page-subheader">{{ section.settings.section_title | escape }}</div>
+        <h2>{{ section.settings.title | escape }}</h2>
+        <div class="section-header__link">
+          <a class="link--secondary" href="{{ section.settings.link }}">{{section.settings.link_text}}</a>
+        </div>
+      </div>
+    {% endif %}
+    <div class="flex-container">
+      <div class="flex-item flex-item--one-third">
+        <img class="space--mb" src="{{ section.settings.image | img_url: '900x' }}">
+        <div class="text__subtitle ">{{ section.settings.image_subtitle | escape }}</div>
+      </div>
+
+      <div class="flex-item flex-item--two-thirds">
+        {%- assign collection = collections[section.settings.collection] -%}
+        <div class="flex-container flex-container--right">
+          {% for product in collection.products limit: 2 %}
+            {% if forloop.index < 2 %}
+              <a class="flex-item flex-item--one-third" href="{{ product.url | within: collection }}">
+                <img class="lazyload space--mb"
+                     src="{{ product.featured_image | img_url: '300x300' }}"
+                     data-src="{{ img_url }}"
+                     data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                     data-aspectratio="{{ product.featured_image.aspect_ratio }}"
+                     data-sizes="auto"
+                     alt="{{ product.featured_image.alt | escape }}">
+                 <div class="grid-view-item__vendor">{{ product.vendor }}</div>
+                 <div class="grid-view-item__title">{{ product.title }}</div>
+                 <div class="grid-view-item__meta">
+                   {% include 'product-price' %}
+                 </div>
+               </a>
+            {% else %}
+              <a class="flex-item" href="{{ product.url | within: collection }}">
+                <img class="lazyload space--mb"
+                     src="{{ product.featured_image | img_url: '300x300' }}"
+                     data-src="{{ img_url }}"
+                     data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                     data-aspectratio="{{ product.featured_image.aspect_ratio }}"
+                     data-sizes="auto"
+                     alt="{{ product.featured_image.alt | escape }}">
+                 <div class="grid-view-item__vendor">{{ product.vendor }}</div>
+                 <div class="grid-view-item__title">{{ product.title }}</div>
+                 <div class="grid-view-item__meta">
+                   {% include 'product-price' %}
+                 </div>
+               </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Featured Artist",
+    "class": "index-section index-section--flush index-section--dark",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "section_title",
+        "label": "Section Title"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link Text"
+      },
+      {
+        "type": "url",
+        "id": "link",
+        "label": "Link"
+      },
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "Collection"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Artist Image"
+      },
+      {
+        "type": "text",
+        "id": "image_subtitle",
+        "label": "Image Subtitle"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Artist",
+        "category": "Collection"
+      }
+    ]
+  }
+{% endschema %}
