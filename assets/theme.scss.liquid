@@ -1379,6 +1379,7 @@ h6 {
 h1 {
   font-size: 40px;
   text-transform: none;
+  line-height: 1.2;
   letter-spacing: -1px;
 
   @include media-query($small) {
@@ -3006,11 +3007,11 @@ $slick-dot-size-small: 10px;
   padding-bottom: 225px;
 
   @include media-query($small) {
-    padding: $section-spacing-large 0;
+    padding-bottom: $section-spacing-large;
   }
 }
 
-.index-section--flush--top {
+.index-section--top--flush {
   margin-top: -($section-spacing-large);
 
   @include media-query($small) {
@@ -5405,6 +5406,13 @@ $toolbar-height-small: 46px;
   }
 }
 
+.feature-row--mobile {
+  @include media-query($small) {
+    @include display-flexbox();
+    @include flex-direction(column);
+  }
+}
+
 .feature-row--mobile-reverse {
   @include media-query($small) {
     @include display-flexbox();
@@ -5437,12 +5445,37 @@ $toolbar-height-small: 46px;
 .feature-row__text__text-box {
   flex: 1 0 50%;
   max-width: 600px;
-  padding: $section-spacing-large 55px $section-spacing-small 55px;
+  padding: $section-spacing-large 55px;
   margin-left: auto;
 
+
   @include media-query($small) {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 60px 20px;
+  }
+}
+
+.feature-row__text__text-box--large {
+  height: 720px;
+  justify-content: space-between;
+  @include display-flexbox();
+
+  @include media-query($small) {
+    display: block;
+    height: auto;
+  }
+}
+
+.feature-row__text__text-box--item--right {
+  float: right;
+  text-align: right;
+  align-self: flex-end;
+}
+
+.feature-row__text__title-container {
+  max-width: 330px;
+
+  @include media-query($small) {
+    max-width: 100%;
   }
 }
 
@@ -5478,8 +5511,13 @@ $toolbar-height-small: 46px;
   }
 }
 
+.feature-row__hero-image__container--large {
+  max-height: 720px;
+}
+
 .feature-row__hero-image {
   object-fit: cover;
+  width: 100%;
 
   @include media-query($small) {
     margin-bottom: -7px;
@@ -5523,19 +5561,6 @@ $toolbar-height-small: 46px;
 .feature-row__subtext-container--right {
   display: flex;
   justify-content: flex-end;
-}
-
-.featured-row__subtext {
-  font-size: $font-size--xsmall;
-  line-height: 1.4;
-  color: $color-text;
-  position: absolute;
-  bottom: 0;
-  max-width: 192px;
-
-  & > * {
-    color: $color-text;
-  }
 }
 
 .interview-overlay {
@@ -5614,6 +5639,23 @@ $toolbar-height-small: 46px;
   }
 }
 
+.text__subtitle--xsmall {
+  max-width: 192px;
+  line-height: $standard-line-height;
+  font-size: $font-size--xsmall;
+}
+
+.text__tag-title {
+  font-size: $font-size--small;
+  color: $brown;
+  line-height: 1.2;
+}
+
+.text__tag-subtitle {
+  font-size: $font-size--xsmall;
+  line-height: 1.2;
+}
+
 .flex-container {
   display: flex;
   margin-bottom: 110px;
@@ -5679,7 +5721,7 @@ $toolbar-height-small: 46px;
   }
 }
 
-.featured-stories {
+.featured-stories, .featured-artist {
   padding-top: 130px;
   padding-bottom: 30px;
 

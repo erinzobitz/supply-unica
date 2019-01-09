@@ -1,0 +1,73 @@
+<div class="new-in shopify-section">
+  {%- assign collection = collections[section.settings.collection] -%}
+  <div class="feature-row feature-row--mobile">
+    <div class="feature-row__item feature-row__text__text-box feature-row__text__text-box--large">
+      <div class="section-header">
+        <div class="page-subheader">{{ section.settings.section_title | escape }}</div>
+        <h1 class="feature-row__text__title-container">{{ section.settings.title | escape }}</h1>
+        <div class="section-header__link">
+          <a class="link--secondary" href="{{ section.settings.link }}">{{ section.settings.link_text }}</a>
+        </div>
+      </div>
+      <div class="feature-row__text__text-box--item--right">
+        <img alt="{{ section.settings.title }}" src="http://placekitten.com/151/177">
+        <div class="text__tag-subtitle">Made By</div>
+        <div class="text__tag-title space--mb">{{ collection.title }}</div>
+        <div class="text__subtitle--xsmall">{{ section.settings.image_subtitle }}</div>
+      </div>
+    </div>
+    <div class="feature-row__hero-image__container feature-row__hero-image__container--large feature-row__item">
+      <img class="feature-row__hero-image" alt="{{ section.settings.title }}" src="{{ section.settings.product_image | img_url: '900x' }}">
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "New In",
+    "class": "index-section--top--flush",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "section_title",
+        "label": "Section Title"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link Text"
+      },
+      {
+        "type": "url",
+        "id": "link",
+        "label": "Link"
+      },
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "COLLECTION Collection"
+      },
+      {
+        "type": "image_picker",
+        "id": "product_image",
+        "label": "Product Image"
+      },
+      {
+        "type": "text",
+        "id": "image_subtitle",
+        "label": "Image Subtitle"
+      }
+    ],
+    "presets": [
+      {
+        "name": "New In",
+        "category": "Collection"
+      }
+    ]
+  }
+{% endschema %}
