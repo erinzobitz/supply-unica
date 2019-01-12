@@ -1,7 +1,44 @@
 <footer class="site-footer" role="contentinfo">
   <div class="page-width">
-    <div class="brand__logo">Supply Unica</div>
+    <div class="brand__logo">
+      <a href="/" itemprop="url">
+      Supply Unica
+      </a>
+    </div>
     <div class="grid grid--no-gutters">
+      {% if section.settings.footer_newsletter_enable %}
+        <div class="grid__item medium-up--one-quarter">
+          <div class="site-footer__newsletter">
+            <div class="site-footer__list-header">Sign up for our newsletter</div>
+            {% form 'customer' %}
+              {{ form.errors | default_errors }}
+              {% if form.posted_successfully? %}
+                <p class="form--success">{{ 'general.newsletter_form.confirmation' | t }}</p>
+              {% else %}
+                <div class="site-footer__newsletter__input-group input-group">
+                  <input type="hidden" name="contact[tags]" value="newsletter">
+                  <input type="email"
+                    name="contact[email]"
+                    id="Email"
+                    class="input-group__field newsletter__input"
+                    value="{% if customer %}{{ customer.email }}{% endif %}"
+                    placeholder="Email"
+                    autocorrect="off"
+                    autocapitalize="off">
+                  <span class="input-group__btn">
+                    <button type="submit" class="btn newsletter__submit" name="commit" id="Subscribe">
+                      <svg width="20" height="17" viewBox="0 0 20 17" fill="none">
+                        <path d="M10.6092 15.0074L11.8574 16.2853L20 8.14264L11.8574 0L10.6092 1.27786L16.5825 7.25111H0V9.03418H16.5825L10.6092 15.0074Z" fill="#232121"/>
+                      </svg>
+                    </button>
+                  </span>
+                </div>
+              {% endif %}
+            {% endform %}
+          </div>
+        </div>
+      {% endif %}
+
       <div class="grid__item medium-up--one-quarter">
         {%- assign footer_linklist = section.settings.footer_linklist -%}
         {% if linklists[footer_linklist].links.size > 0 %}
@@ -37,39 +74,6 @@
         </ul>
       </div>
 
-      {% if section.settings.footer_newsletter_enable %}
-        <div class="grid__item medium-up--one-quarter">
-          <div class="site-footer__newsletter">
-            <div class="site-footer__list-header">Sign up for our newsletter</div>
-            {% form 'customer' %}
-              {{ form.errors | default_errors }}
-              {% if form.posted_successfully? %}
-                <p class="form--success">{{ 'general.newsletter_form.confirmation' | t }}</p>
-              {% else %}
-                <div class="site-footer__newsletter__input-group input-group">
-                  <input type="hidden" name="contact[tags]" value="newsletter">
-                  <input type="email"
-                    name="contact[email]"
-                    id="Email"
-                    class="input-group__field newsletter__input"
-                    value="{% if customer %}{{ customer.email }}{% endif %}"
-                    placeholder="Email"
-                    autocorrect="off"
-                    autocapitalize="off">
-                  <span class="input-group__btn">
-                    <button type="submit" class="btn newsletter__submit" name="commit" id="Subscribe">
-                      <svg width="20" height="17" viewBox="0 0 20 17" fill="none">
-                        <path d="M10.6092 15.0074L11.8574 16.2853L20 8.14264L11.8574 0L10.6092 1.27786L16.5825 7.25111H0V9.03418H16.5825L10.6092 15.0074Z" fill="#232121"/>
-                      </svg>
-                    </button>
-                  </span>
-                </div>
-              {% endif %}
-            {% endform %}
-          </div>
-        </div>
-      {% endif %}
-
       <div class="grid__item medium-up--one-quarter">
         <div class="site-footer__copyright medium-up--text-left">
           <small class="site-footer__copyright-content">
@@ -82,7 +86,7 @@
           <br>
           <br>
           <small class="site-footer__copyright-content">
-            &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}
+            &copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}
           </small>
         </div>
       </div>

@@ -20,7 +20,7 @@
         <div class="flex-container flex-container--right">
           {% for product in collection.products limit: 2 %}
             {% if forloop.index < 2 %}
-              <a class="flex-item flex-item--one-third" href="{{ product.url | within: collection }}">
+              <a class="flex-item flex-item--one-third grid-view-item__link" href="{{ product.url | within: collection }}">
                 <img class="lazyload space--mb"
                      src="{{ product.featured_image | img_url: '300x300' }}"
                      data-src="{{ img_url }}"
