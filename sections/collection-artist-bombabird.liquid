@@ -25,13 +25,13 @@
       <div class="feature-row feature-row--mobile-reverse">
         <div class="feature-row__item feature-row__text__text-box">
           <h1>{{ section.settings.title_1 | escape }}</h1>
-          {% if section.settings.show_bio  %}
+          {% if section.settings.show_overlay  %}
             <div class="section-header__link">
-              <a class="js-interview-overlay-open link--secondary" href="#">View Bio +</a>
+              <a class="js-interview-overlay-open link--secondary" href="#">{{ section.settings.overlay_link_text }}</a>
             </div>
           {% endif %}
-          <h3 class="feature-row__text__quote">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</h3>
-          <div class="feature-row__text__subtext font--small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</div>
+          <h3 class="feature-row__text__quote">{{ section.settings.subtitle_1 }}</h3>
+          <div class="feature-row__text__subtext font--small">{{ section.settings.body_1 }}</div>
         </div>
         <div class="feature-row__hero-image__container feature-row__item">
           <img class="feature-row__hero-image" src="{{ section.settings.image_1 | img_url: '900x' }}">
@@ -71,7 +71,7 @@
 
     <div class="grid grid--uniform grid--view-items">
       {% for product in collection.products limit: product_limit %}
-        {% if forloop.index < 4 %}
+        {% if forloop.index < 5 %}
           <div class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
             {% include 'product-card-grid', max_height: max_height %}
           </div>
@@ -133,7 +133,7 @@
       </div>
     {% endcapture %}
 
-    <div class="feature-row">
+    <div class="feature-row feature-row--mobile-reverse">
       {% if section.settings.layout_2 == 'left' %}
         {{ image_layout }}
       {% endif %}
@@ -193,7 +193,7 @@
 
     <div class="grid grid--uniform grid--view-items">
       {% for product in collection.products limit: product_limit %}
-        {% if forloop.index > 3 and forloop.index < 7 %}
+        {% if forloop.index > 4 and forloop.index < 9 %}
           <div class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
             {% include 'product-card-grid', max_height: max_height %}
           </div>
@@ -255,7 +255,7 @@
       </div>
     {% endcapture %}
 
-    <div class="feature-row">
+    <div class="feature-row feature-row--mobile-reverse">
       {% if section.settings.layout_3 == 'left' %}
         {{ image_layout }}
       {% endif %}
@@ -310,7 +310,7 @@
 
     <div class="grid grid--uniform grid--view-items">
       {% for product in collection.products limit: product_limit %}
-        {% if forloop.index > 6 %}
+        {% if forloop.index > 8 %}
           <div class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
             {% include 'product-card-grid', max_height: max_height %}
           </div>
@@ -363,9 +363,27 @@
       },
       {
         "type": "checkbox",
-        "id": "show_bio",
-        "label": "COLLECTIONS Show bio",
+        "id": "show_overlay",
+        "label": "COLLECTIONS Show Overlay",
         "default": true
+      },
+      {
+        "type": "text",
+        "id": "overlay_link_text",
+        "label": "COLLECTIONS Overlay Link Text",
+        "default": "View Bio +"
+      },
+      {
+        "type": "text",
+        "id": "subtitle_1",
+        "label": "COLLECTIONS Subtitle 1",
+        "default": "I'm a subtitle"
+      },
+      {
+        "type": "text",
+        "id": "body_1",
+        "label": "COLLECTIONS Body 1",
+        "default": "I'm a body"
       },
       {
         "type": "text",

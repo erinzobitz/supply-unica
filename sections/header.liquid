@@ -115,7 +115,7 @@
       <div class="site-header__row-item">
         <nav id="AccessibleNav" role="navigation">
           <div class="site-header__nav-section">
-            <a href="#" class="site-header__nav-item--with-link" id="shop-link">
+            <a href="#" class="site-header__link site-header__nav-item--with-link" id="shop-link">
               Shop
               <svg class="site-header__plus-icon" width="10" height="10" viewBox="0 0 10 10" fill="none">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M4 6V10H6V6H10V4H6V0H4V4H0V6H4Z" fill="#232121"/>
@@ -124,9 +124,9 @@
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M10 2H0V0H10V2Z" fill="#232121"/>
               </svg>
             </a>
-            <a href="/collections/all-artists">Artists</a>
-            <a href="/blogs/supply-unica-blog">Stories</a>
-            <a href="/pages/about">About</a>
+            <a class="site-header__link" href="/collections/all-artists">Artists</a>
+            <a class="site-header__link" href="/blogs/supply-unica-blog">Stories</a>
+            <a class="site-header__link" href="/pages/about">About</a>
           </div>
         </nav>
       </div>
@@ -134,9 +134,9 @@
         <div class="site-header__links-wrapper">
           {% if shop.customer_accounts_enabled %}
             {% if customer %}
-              <a href="/account" class="site-header__account">Account</a>
+              <a href="/account" class="site-header__account site-header__link">Account</a>
             {% else %}
-              <a href="/account/login" class="site-header__account">LogIn</a>
+              <a href="/account/login" class="site-header__account site-header__link">LogIn</a>
             {% endif %}
           {% endif %}
 

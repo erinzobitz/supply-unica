@@ -12,20 +12,16 @@
           </a>
         </h3>
 
-        {% if collection.image %}
-          {%- assign collection_image = collection.image -%}
-        {% elsif collection.products.first and collection.products.first.images != empty %}
-          {%- assign collection_image = collection.products.first.featured_image -%}
-        {% else %}
-          {% assign collection_image = blank %}
-        {% endif %}
+        {%- assign collection_image = collection.image -%}
+        {%- assign collection_first_product = collection.products.first.featured_image -%}
+
 
         <div class="collection-list__image-preview"
-             style="background-image: url('{{ collection_image | img_url: '352x410' }}')">
+             style="background-image: url('{{ collection_first_product | img_url: '352x410' }}')">
         </div>
 
         <div class="collection-list__image-preview--featured"
-             style="background-image: url('http://placekitten.com/187/226')">
+             style="background-image: url('{{ collection_image | img_url: '187x226' }}')">
         </div>
       {% endfor %}
     </div>
