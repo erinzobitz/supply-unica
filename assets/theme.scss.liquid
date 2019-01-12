@@ -330,7 +330,7 @@ $color-text-field-text: {{ settings.color_text_field_text }};
 $color-navigation-text: {{ settings.color_text }};
 
 // Button colors
-$color-btn-primary: {{ settings.color_button }};
+$color-btn-primary: $black;
 $color-btn-primary-text: {{ settings.color_button_text }};
 
 // Link buttons and secondary cta
@@ -1798,7 +1798,7 @@ a.grid-view-item__image-container {
   font-size: $font-size-base - 2;
 
   @include media-query($medium-up) {
-    padding: $input-padding-top-bottom $input-padding-left-right;
+    padding: 15px $input-padding-left-right;
   }
 
   &:hover,
@@ -3204,27 +3204,34 @@ $color-blankstate-background: rgba($color-body-text, 0.1);
 }
 
 h1.product-single__title {
-  margin-bottom: 0;
+  font-size: 32px;
+  margin-bottom: 15px;
 }
 
 .product-single__price {
   color: $color-body-text;
-  font-size: em($font-size-base + 4);
-  font-weight: $font-weight-header;
+  font-family: $su-font-light;
   margin-bottom: $grid-gutter;
 
   @include media-query($small) {
     display: block;
     font-size: em($font-size-base + 2);
   }
+
+  .product-price__price {
+    font-size: 24px;
+    color: $color-text;
+  }
 }
 
 .product-single__vendor {
-  color: $color-body-text;
-  font-size: em($font-size-base);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-size: $font-size-base;
+  line-height: 1.2;
   margin: 5px 0 10px;
+
+  a {
+    color: $brown;
+  }
 }
 
 /*================ Add to cart form ================*/
@@ -3296,6 +3303,17 @@ h1.product-single__title {
 
 .product-single__description {
   margin-top: $grid-gutter;
+  font-size: $font-size--small;
+
+  a {
+    color: $brown;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $color-text-hover;
+    }
+  }
 }
 
 /*================ Product Images ================*/
@@ -4352,6 +4370,15 @@ h1.product-single__title {
   vertical-align: middle;
 }
 
+.share-icon {
+  padding-right: 15px;
+
+  &:hover {
+    path {
+      fill: $color-text-hover;
+    }
+  }
+}
 
 .search-bar__form {
   display: table;
