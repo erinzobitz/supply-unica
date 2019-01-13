@@ -23,7 +23,7 @@
   <div class="section-container">
     <div class="feature-row__header">
       <div class="feature-row feature-row--mobile-reverse">
-        <div class="feature-row__item feature-row__text__text-box">
+        <div class="feature-row__item--hero feature-row__text__text-box--hero">
           <h1>{{ section.settings.title_1 | escape }}</h1>
           {% if section.settings.show_overlay  %}
             <div class="section-header__link">
@@ -33,7 +33,7 @@
           <h3 class="feature-row__text__quote">{{ section.settings.subtitle_1 }}</h3>
           <div class="feature-row__text__subtext font--small">{{ section.settings.body_1 }}</div>
         </div>
-        <div class="feature-row__hero-image__container feature-row__item">
+        <div class="feature-row__hero-image__container feature-row__item--hero">
           <img class="feature-row__hero-image" src="{{ section.settings.image_1 | img_url: '900x' }}">
         </div>
       </div>
@@ -112,7 +112,17 @@
           {%- assign img_url = section.settings.image_2 | img_url: '1x1' | replace: '_2x1.', '_{width}x.' -%}
           {% include 'image-style' with image: section.settings.image_2, width: 545, height: 545, small_style: true, wrapper_id: wrapper_id, img_id: img_id %}
           <div id="{{ wrapper_id }}" class="feature-row__image-wrapper js">
-            <div style="padding-top:{{ 1 | divided_by: section.settings.image_2.aspect_ratio | times: 100}}%;">
+            <div class="hero-small--hide" style="padding-top:{{ 1 | divided_by: section.settings.image_2.aspect_ratio | times: 100}}%;">
+              <img id="{{ img_id }}"
+                   class="feature-row__image"
+                   src="{{ section.settings.image_2 | img_url: '900x' }}"
+                   data-src="{{ img_url }}"
+                   data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                   data-aspectratio="{{ section.settings.image_2.aspect_ratio }}"
+                   data-sizes="auto"
+                   alt="{{ section.settings.image_2.alt | escape }}">
+            </div>
+            <div class="hero-medium-up--hide">
               <img id="{{ img_id }}"
                    class="feature-row__image"
                    src="{{ section.settings.image_2 | img_url: '900x' }}"
@@ -234,7 +244,17 @@
           {%- assign img_url = section.settings.image_3 | img_url: '1x1' | replace: '_3x1.', '_{width}x.' -%}
           {% include 'image-style' with image: section.settings.image_3, width: 545, height: 545, small_style: true, wrapper_id: wrapper_id, img_id: img_id %}
           <div id="{{ wrapper_id }}" class="feature-row__image-wrapper js">
-            <div style="padding-top:{{ 1 | divided_by: section.settings.image_3.aspect_ratio | times: 100}}%;">
+            <div class="hero-small--hide" style="padding-top:{{ 1 | divided_by: section.settings.image_3.aspect_ratio | times: 100}}%;">
+              <img id="{{ img_id }}"
+                   class="feature-row__image"
+                   src="{{ section.settings.image_3 | img_url: '900x' }}"
+                   data-src="{{ img_url }}"
+                   data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                   data-aspectratio="{{ section.settings.image_3.aspect_ratio }}"
+                   data-sizes="auto"
+                   alt="{{ section.settings.image_3.alt | escape }}">
+            </div>
+            <div class="hero-medium-up--hide">
               <img id="{{ img_id }}"
                    class="feature-row__image"
                    src="{{ section.settings.image_3 | img_url: '900x' }}"

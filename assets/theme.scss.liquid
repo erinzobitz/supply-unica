@@ -277,11 +277,16 @@
   Grid Breakpoints and Class Names
     - Do not change the variable names
 ==============================================================================*/
+
 $grid-medium: 750px;
 $grid-large: 990px;
 $grid-widescreen: 1400px;
 $grid-gutter: 30px;
 $grid-gutter-mobile: 22px;
+
+$grid-hero-small: 1024px;
+$hero-small: 'hero-small';
+$hero-medium-up: 'hero-medium-up';
 
 $small: 'small';
 $medium: 'medium';
@@ -297,7 +302,7 @@ $widescreen: 'widescreen';
     - Default column widths: $grid-breakpoint-has-widths: ($small, $medium-up);
     - Default is no push classes
 ==============================================================================*/
-$grid-breakpoint-has-widths: ($small, $medium-up);
+$grid-breakpoint-has-widths: ($small, $hero-small, $hero-medium-up, $medium-up);
 $grid-breakpoint-has-push: ($small, $medium-up);
 
 /*================ Color Variables ================*/
@@ -917,6 +922,8 @@ textarea {
 // The `$grid-breakpoints` list is used to build our media queries.
 // You can use these in the media-query mixin.
 $grid-breakpoints: (
+  $hero-small '(max-width: #{$grid-hero-small - 1})',
+  $hero-medium-up '(min-width: #{$grid-hero-small})',
   $small '(max-width: #{$grid-medium - 1})',
   $medium '(min-width: #{$grid-medium}) and (max-width: #{$grid-large - 1})',
   $medium-down '(max-width: #{$grid-large - 1})',
@@ -5525,6 +5532,7 @@ $toolbar-height-small: 46px;
 
   @include media-query($small) {
     padding-left: 0;
+    width: 100%;
   }
 }
 
@@ -5533,6 +5541,7 @@ $toolbar-height-small: 46px;
 
   @include media-query($small) {
     padding-right: 0;
+    width: 100%;
   }
 }
 
@@ -5542,6 +5551,23 @@ $toolbar-height-small: 46px;
   padding: $section-spacing-large 55px;
   margin-left: auto;
 
+
+  @include media-query($small) {
+    padding: 60px 20px;
+    margin: 0 auto;
+  }
+}
+
+.feature-row__text__text-box--hero {
+  flex: 1 0 50%;
+  max-width: 600px;
+  padding: $section-spacing-large 55px;
+  margin-left: auto;
+
+  @include media-query($hero-small) {
+    padding: 60px 55px;
+    margin: 0 auto;
+  }
 
   @include media-query($small) {
     padding: 60px 20px;
@@ -5569,7 +5595,7 @@ $toolbar-height-small: 46px;
 .feature-row__text__title-container {
   max-width: 330px;
 
-  @include media-query($small) {
+  @include media-query($hero-small) {
     max-width: 100%;
   }
 }
@@ -5584,19 +5610,11 @@ $toolbar-height-small: 46px;
 .feature-row__text__quote-container--left {
   display: flex;
   justify-content: flex-end;
-
-  @include media-query($small) {
-    display: block;
-  }
 }
 
 .feature-row__text__quote-container--right {
   display: flex;
   justify-content: flex-start;
-
-  @include media-query($small) {
-    display: block;
-  }
 }
 
 .feature-row__text__subtext {
@@ -5610,7 +5628,11 @@ $toolbar-height-small: 46px;
   max-height: 600px;
 
   @include media-query($small) {
-    display: block;
+    max-height: 100%;
+
+    img {
+      height: 100%;
+    }
   }
 }
 
@@ -5650,7 +5672,16 @@ $toolbar-height-small: 46px;
   @include media-query($small) {
     @include flex(1 1 auto);
     max-width: 100%;
-    // margin: 0 auto;
+  }
+}
+
+.feature-row__item--hero {
+  @include flex(0 1 50%);
+
+  @include media-query($hero-small) {
+    @include flex(1 1 auto);
+    max-width: 100%;
+    width: 100%;
   }
 }
 
@@ -5667,9 +5698,13 @@ $toolbar-height-small: 46px;
     width: 100%;
     position: absolute;
     top: 0;
+
+    @include media-query($hero-small) {
+      position: relative;
+    }
   }
 
-  @include media-query($small) {
+  @include media-query($hero-small) {
     order: 1;
   }
 }
