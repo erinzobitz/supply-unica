@@ -334,13 +334,16 @@ $color-text-field: {{ settings.color_text_field }};
 $color-text-field-text: {{ settings.color_text_field_text }};
 $color-navigation-text: {{ settings.color_text }};
 
+// Outline color
+$outline-color: #C1B9B7;
+
 // Button colors
 $color-btn-primary: $black;
 $color-btn-primary-text: {{ settings.color_button_text }};
 
 // Link buttons and secondary cta
 $color-link: $color-body-text;
-$opacity-link-hover: 0.6;
+$opacity-link-hover: 0.9;
 $transition-link-hover: 0.1s cubic-bezier(0.44, 0.13, 0.48, 0.87);
 $secondary-link-color: $brown;
 $secondary-link-color-hover: $beige;
@@ -1803,14 +1806,19 @@ a.grid-view-item__image-container {
   letter-spacing: 0.08em;
   white-space: normal;
   font-size: $font-size-base - 2;
+  transition: opacity 100ms linear;
 
   @include media-query($medium-up) {
     padding: 15px $input-padding-left-right;
   }
 
-  &:hover,
-  &:focus {
+  &:hover {
     opacity: $opacity-link-hover;
+  }
+
+  &:focus {
+    opacity: $opacity-link-hover - .1;
+    outline: 1px solid $outline-color;
   }
 
   .icon-arrow-right,
@@ -4378,12 +4386,12 @@ h1.product-single__title {
 }
 
 .share-icon {
-  padding-right: 15px;
+  margin-right: 15px;
 
-  &:hover {
-    path {
-      fill: $color-text-hover;
-    }
+  &:hover,
+  &:focus,
+  &:active {
+    border-bottom: 1px solid $black;
   }
 }
 
