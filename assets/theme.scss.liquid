@@ -5343,7 +5343,7 @@ $toolbar-height-small: 46px;
 
 .site-footer {
   margin: $section-spacing 0 0 0;
-  padding: $section-spacing-large 0;
+  padding: $section-spacing-large 0 $section-spacing 0;
   background-color: $footer-color;
 
   @include media-query($small) {
@@ -5464,23 +5464,18 @@ $toolbar-height-small: 46px;
   padding-right: 0;
 }
 
-.site-footer__payment-icons {
-  margin-top: ($gutter-site-mobile);
+.site-footer__credit-link-container {
+  float: right;
+  margin-top: $section-spacing-large;
+  font-size: $font-size--xsmall;
+}
 
-  @include media-query($medium-up) {
-    margin-top: $gutter-site-mobile;
+.site-footer__credit-link {
+  color: $beige;
 
-    .site-footer__copyright--right & {
-      padding-left: 30px;
-    }
-  }
-
-  .payment-icon {
-    margin-right: 5px;
-
-    &:last-child {
-      margin-right: 0;
-    }
+  &:hover,
+  &:active {
+    color: $brown;
   }
 }
 
