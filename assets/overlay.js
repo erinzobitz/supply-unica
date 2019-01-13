@@ -1,9 +1,21 @@
 $(document).ready(function() {
+  if (window.location.hash.substring(1) == 'interview') {
+    openOverlay();
+  }
+
   $('.js-interview-overlay-open').click(function() {
-    $('.interview-overlay').addClass('interview-overlay--is-visible');
+    openOverlay();
   });
 
   $('.js-interview-overlay-close').click(function() {
-    $('.interview-overlay').removeClass('interview-overlay--is-visible');
+    closeOverlay();
   });
+
+  function openOverlay() {
+    $('.interview-overlay').addClass('interview-overlay--is-visible');
+  }
+
+  function closeOverlay() {
+    $('.interview-overlay').removeClass('interview-overlay--is-visible');
+  }
 });
