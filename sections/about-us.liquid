@@ -1,4 +1,4 @@
-<div class="about-us index-section index-section--flush">
+<div class="about-us {% if section.settings.show_dark_background %}index-section--dark{% endif %}">
   <div class="page-width">
     <div class="about-us__text-container">
       <h2 class="text-center">{{ section.settings.text }}</h2>
@@ -12,8 +12,14 @@
 {% schema %}
   {
     "name": "About Us",
-    "class": "index-section index-section--dark" ,
+    "class": "index-section index-section--flush" ,
     "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_dark_background",
+        "label": "COLLECTIONS Dark Background",
+        "default": true
+      },
       {
         "type": "text",
         "id": "text",

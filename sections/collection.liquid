@@ -65,8 +65,14 @@
 {% schema %}
   {
     "name": "Featured collection",
-    "class": "index-section index-section--with-grid index-section--dark",
+    "class": "index-section--with-grid",
     "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_dark_background",
+        "label": "Dark Background",
+        "default": false
+      },
       {
         "type": "text",
         "id": "title",

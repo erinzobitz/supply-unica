@@ -1,18 +1,20 @@
-<div class="featured-artist">
+<div class="featured-artist {% if section.settings.show_dark_background %}index-section--dark{% endif %}">
   <div class="page-width">
     {% if section.settings.title != blank %}
       <div class="section-header">
         <div class="page-subheader">{{ section.settings.section_title | escape }}</div>
         <h2>{{ section.settings.title | escape }}</h2>
         <div class="section-header__link">
-          <a class="link--secondary" href="{{ section.settings.link }}">{{section.settings.link_text}}</a>
+          <a class="link--secondary" href="{{ section.settings.link }}">{{ section.settings.link_text }}</a>
         </div>
       </div>
     {% endif %}
     <div class="flex-container">
       <div class="flex-item flex-item--one-third">
-        <img class="space--mb" src="{{ section.settings.image | img_url: '352x' }}">
-        <div class="text__subtitle">{{ section.settings.image_subtitle | escape }}</div>
+        <a itemprop="url" href="{{ section.settings.link }}">
+          <img class="space--mb" src="{{ section.settings.image | img_url: '352x' }}">
+        </a>
+        <div class="text__subtitle">{{ section.settings.image_subtitle }}</div>
       </div>
 
       <div class="flex-item flex-item--two-thirds">
@@ -35,7 +37,7 @@
                  </div>
                </a>
             {% else %}
-              <a class="flex-item" href="{{ product.url | within: collection }}">
+              <a class="flex-item grid-view-item__link" href="{{ product.url | within: collection }}">
                 <img class="lazyload space--mb"
                      src="{{ product.featured_image | img_url: '300x300' }}"
                      data-src="{{ img_url }}"
@@ -60,8 +62,13 @@
 {% schema %}
   {
     "name": "Featured Artist",
-    "class": "index-section index-section--dark",
     "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_dark_background",
+        "label": "Dark Background",
+        "default": false
+      },
       {
         "type": "text",
         "id": "title",

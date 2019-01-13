@@ -3856,13 +3856,20 @@ h1.product-single__title {
 
 /*================ LINKS ================*/
 .link--primary {
-  color: $color-text;
-  text-decoration: none;
-  font-size: $font-size-base;
+  color: $beige;
 
-  &:hover {
-    color: $color-text-hover;
-    text-decoration: underline;
+  &:hover,
+  &:active {
+    color: $brown;
+  }
+}
+
+.link--primary--inverse {
+  color: $brown;
+
+  &:hover,
+  &:active {
+    color: $beige;
   }
 }
 
@@ -5464,19 +5471,10 @@ $toolbar-height-small: 46px;
   padding-right: 0;
 }
 
-.site-footer__credit-link-container {
+.site-footer__credit-links-container {
   float: right;
   margin-top: $section-spacing-large;
   font-size: $font-size--xsmall;
-}
-
-.site-footer__credit-link {
-  color: $beige;
-
-  &:hover,
-  &:active {
-    color: $brown;
-  }
 }
 
 .site-footer__copyright--bottom {
