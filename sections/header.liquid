@@ -106,7 +106,7 @@
         </div>
         <div class="site-header__row-item--top">
           <div class="site-header__links-wrapper--small">
-            <a href="/pages/for-artists">Become our artist</a>
+            <a href="/pages/for-artists">Become an artist</a>
         </div>
       </div>
     </div>
@@ -125,7 +125,7 @@
               </svg>
             </a>
             <a class="site-header__link" href="/collections/all-artists">Artists</a>
-            <a class="site-header__link" href="/blogs/supply-unica-blog">Stories</a>
+            <a class="site-header__link" href="/kickstarter">UNICA Mag</a>
             <a class="site-header__link" href="/pages/about">About</a>
           </div>
         </nav>
@@ -136,7 +136,7 @@
             {% if customer %}
               <a href="/account" class="site-header__account site-header__link">Account</a>
             {% else %}
-              <a href="/account/login" class="site-header__account site-header__link">LogIn</a>
+              <a href="/account/login" class="site-header__account site-header__link">Log In</a>
             {% endif %}
           {% endif %}
 
@@ -173,18 +173,18 @@
           {% include 'site-nav' %}
         </div>
         <a href="collections/all-artists" class="mobile-nav__link">Artists</a>
-        <a href="/blogs/supply-unica-blog" class="mobile-nav__link">Stories</a>
+        <a href="/kickstarter" class="mobile-nav__link">UNICA Mag</a>
         <a href="/pages/about" class="mobile-nav__link">About</a>
         {% if shop.customer_accounts_enabled %}
           {% if customer %}
             <a href="/account" class="mobile-nav__link">Account</a>
           {% else %}
-            <a href="/account/login" class="mobile-nav__link">LogIn</a>
+            <a href="/account/login" class="mobile-nav__link">Log In</a>
           {% endif %}
         {% endif %}
       </li>
       <li class="mobile-nav__item--small">
-        <a href="/pages/for-artists" class="mobile-nav__link--small">Become our artist</a>
+        <a href="/pages/for-artists" class="mobile-nav__link--small">Become an artist</a>
       </li>
     </ul>
   </nav>

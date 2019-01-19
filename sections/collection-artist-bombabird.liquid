@@ -12,6 +12,7 @@
         </div>
       {% endif %}
       {% for block in section.blocks %}
+      	<div class="interview-overlay__question rte-setting">{{ block.settings.custom-title }}</div>
         <div class="rte-setting">{{ block.settings.custom-text }}</div>
       {% endfor %}
     </div>
@@ -31,7 +32,7 @@
             </div>
           {% endif %}
           <h3 class="feature-row__text__quote">{{ section.settings.subtitle_1 }}</h3>
-          <div class="feature-row__text__subtext font--small">{{ section.settings.body_1 }}</div>
+          <div class="feature-row__text__subtext font--small">{{ section.settings.text_1 }}</div>
         </div>
         <div class="feature-row__hero-image__container feature-row__item--hero">
           <img class="feature-row__hero-image" src="{{ section.settings.image_1 | img_url: '900x' }}">
@@ -384,26 +385,20 @@
       {
         "type": "checkbox",
         "id": "show_overlay",
-        "label": "COLLECTIONS Show Overlay",
+        "label": "HERO Show Overlay",
         "default": true
       },
       {
         "type": "text",
         "id": "overlay_link_text",
-        "label": "COLLECTIONS Overlay Link Text",
+        "label": "HERO Overlay Link Text",
         "default": "View Bio +"
       },
       {
         "type": "text",
         "id": "subtitle_1",
-        "label": "COLLECTIONS Subtitle 1",
+        "label": "HERO Subtitle 1",
         "default": "I'm a subtitle"
-      },
-      {
-        "type": "text",
-        "id": "body_1",
-        "label": "COLLECTIONS Body 1",
-        "default": "I'm a body"
       },
       {
         "type": "text",

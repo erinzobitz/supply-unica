@@ -326,20 +326,20 @@ $expanded-header-color-text-hover: $brown;
 $color-text: $black;
 $color-text-hover: $beige;
 $color-text-shadow: rgba(0, 0, 0, 0.1);
-$color-body-text: {{ settings.color_body_text }};
-$color-sale-text: {{ settings.color_sale_text }};
-$color-small-button: {{ settings.color_small_button }};
-$color-small-button-text: {{ settings.color_small_button_text }};
-$color-text-field: {{ settings.color_text_field }};
-$color-text-field-text: {{ settings.color_text_field_text }};
-$color-navigation-text: {{ settings.color_text }};
+$color-body-text: #232121;
+$color-sale-text: #7796a8;
+$color-small-button: #fff;
+$color-small-button-text: #3d4246;
+$color-text-field: #fff;
+$color-text-field-text: #000;
+$color-navigation-text: #3d4246;
 
 // Outline color
 $outline-color: #C1B9B7;
 
 // Button colors
 $color-btn-primary: $black;
-$color-btn-primary-text: {{ settings.color_button_text }};
+$color-btn-primary-text: #fff;
 
 // Link buttons and secondary cta
 $color-link: $color-body-text;
@@ -350,17 +350,17 @@ $secondary-link-color-hover: $beige;
 
 // Backgrounds
 $color-body: $light-gray;
-$color-bg: {{ settings.color_body_bg }};
+$color-bg: #efefef;
 $color-drawer-background: rgba(0, 0, 0, 0.6);
-$color-bg-alt: {{ settings.color_body_text | color_modify: 'alpha', 0.05 }};
+$color-bg-alt: rgba(35, 33, 33, 0.05);
 
 // Overlays
-$color-overlay-title-text: {{ settings.color_image_overlay_text }};
-$color-image-overlay: {{ settings.color_image_overlay }};
-$opacity-image-overlay: {{ settings.image_overlay_opacity | divided_by: 100.00 }};
+$color-overlay-title-text: #ffffff;
+$color-image-overlay: #3d4246;
+$opacity-image-overlay: 0.25;
 
 // Border colors
-$color-border: {{ settings.color_borders }};
+$color-border: #e8e9eb;
 
 // Helper colors for form error states
 $color-disabled: #f4f4f4;
@@ -407,7 +407,7 @@ $z-index-announcement-bar: 10;
 $z-index-skip-to-content: 10000; // really high to be safe of app markup
 
 /*================ SVG ================*/
-$svg-select-icon: #{'{{ "ico-select.svg" | asset_url }}'};
+$svg-select-icon: #{'//cdn.shopify.com/s/files/1/2375/4349/t/4/assets/ico-select.svg?14725171241089735389'};
 
 /*================ Drawers ================*/
 $transition-drawer: all 0.45s cubic-bezier(0.29, 0.63, 0.44, 1);
@@ -424,23 +424,9 @@ $transition-text-slideshow: all 0.6s cubic-bezier(0.44, 0.13, 0.48, 0.87);
 $transition-image-slideshow: opacity 0.8s cubic-bezier(0.44, 0.13, 0.48, 0.87);
 
 /*================ Typography ================*/
-{% if settings.type_base_family contains 'Google' %}
-  {% assign type_base_parts = settings.type_base_family | split: '_' %}
-  {% assign type_base_name = type_base_parts[1] %}
-  {% capture base_family %}"{{ type_base_name | split: ':' | first | replace: '+', ' ' }}"{% if type_base_parts.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
-{% else %}
-  {% assign base_family = settings.type_base_family %}
-{% endif %}
 
-{% if settings.type_header_family contains 'Google' %}
-  {% assign type_header_parts = settings.type_header_family | split: '_' %}
-  {% assign type_header_name = type_header_parts[1] %}
-  {% capture header_family %}"{{ type_header_name | split: ':' | first | replace: '+', ' ' }}"{% if type_header_parts.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
-  {% assign header_weight = type_header_parts[2] | split: ',' %}
-{% else %}
-  {% assign header_family = settings.type_header_family %}
-  {% assign header_weight = 400 %}
-{% endif %}
+
+
 
 // Supply Unica Fonts
 $su-font: SofiaPro-Regular;
@@ -456,12 +442,12 @@ $font-weight-normal: 400;
 $font-weight-bold: 700;
 
 $font-stack-header: $su-font;
-$font-weight-header: {{ header_weight }};
-$font-size-header: {{ settings.type_header_base_size }};
-$font-bold-titles: {{ settings.type_bold_product_titles }};
+$font-weight-header: 400;
+$font-size-header: 32px;
+$font-bold-titles: false;
 
 $font-stack-body: $su-font;
-$font-size-base: {{ settings.type_base_size }}; // Henseforth known as 1em
+$font-size-base: 16px; // Henseforth known as 1em
 
 $font-stack-cart-notification: "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
 
@@ -471,20 +457,20 @@ $font-size-mobile-input: 16px; // min 16px to prevent zooming
 /*===== Custom SUPPLY UNICA Fonts ======*/
 @font-face {
   font-family: 'SofiaPro-Bold';
-  src: url('{{ 'SofiaPro-Bold.woff2' | asset_url }}') format('woff2'),
-    url('{{ 'SofiaPro-Bold.woff' | asset_url }}') format('woff');
+  src: url('//cdn.shopify.com/s/files/1/2375/4349/t/4/assets/SofiaPro-Bold.woff2?14725171241089735389') format('woff2'),
+    url('//cdn.shopify.com/s/files/1/2375/4349/t/4/assets/SofiaPro-Bold.woff?14725171241089735389') format('woff');
 }
 
 @font-face {
   font-family: 'SofiaPro-Regular';
-  src: url('{{ 'SofiaPro-Regular.woff2' | asset_url }}') format('woff2'),
-    url('{{ 'SofiaPro-Regular.woff' | asset_url }}') format('woff');
+  src: url('//cdn.shopify.com/s/files/1/2375/4349/t/4/assets/SofiaPro-Regular.woff2?14725171241089735389') format('woff2'),
+    url('//cdn.shopify.com/s/files/1/2375/4349/t/4/assets/SofiaPro-Regular.woff?14725171241089735389') format('woff');
 }
 
 @font-face {
   font-family: 'SofiaPro-Light';
-  src: url('{{ 'SofiaPro-Light.woff2' | asset_url }}') format('woff2'),
-    url('{{ 'SofiaPro-Light.woff' | asset_url }}') format('woff');
+  src: url('//cdn.shopify.com/s/files/1/2375/4349/t/4/assets/SofiaPro-Light.woff2?14725171241089735389') format('woff2'),
+    url('//cdn.shopify.com/s/files/1/2375/4349/t/4/assets/SofiaPro-Light.woff?14725171241089735389') format('woff');
 }
 
 /*================ Gift Cards ================*/
@@ -527,7 +513,7 @@ $slick-opacity-not-active: 0.25;
 
 // Only called once so make sure proper file is grabbed
 @function slick-image-url($url) {
-  @return url({{ "ajax-loader.gif" | asset_url }});
+  @return url(//cdn.shopify.com/s/files/1/2375/4349/t/4/assets/ajax-loader.gif?14725171241089735389);
 }
 
 // Unused intentionally
