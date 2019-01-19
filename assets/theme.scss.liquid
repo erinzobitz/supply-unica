@@ -5609,8 +5609,13 @@ $toolbar-height-small: 46px;
 
 .feature-row__text__text-box--item--right {
   float: right;
+  width: 150px;
   text-align: right;
   align-self: flex-end;
+
+  @include media-query($hero-small) {
+    max-width: 100%;
+  }
 }
 
 .feature-row__text__title-container {
@@ -5661,6 +5666,11 @@ $toolbar-height-small: 46px;
   position: absolute;
   bottom: 0;
   padding: 60px 45px;
+
+  @include media-query($small) {
+    position: relative;
+    padding: 20px 0;
+  }
 }
 
 .feature-row__hero-image__container--large {
@@ -6462,7 +6472,8 @@ $toolbar-height-small: 46px;
 
 .collection-list__image-preview {
   display: none;
-  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: contain;
   width: 352px;
   height: 410px;
   position: absolute;
@@ -6471,7 +6482,8 @@ $toolbar-height-small: 46px;
 
 .collection-list__image-preview--featured {
   display: none;
-  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: contain;
   width: 187px;
   height: 226px;
   position: absolute;

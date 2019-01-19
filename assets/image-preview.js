@@ -1,14 +1,13 @@
 $(document).ready(function() {
   $(".collection-list__link--with-image").hover(function() {
-    var imageHeightDifference = 184;
-    var imageTop = $(this).offset().top - 350;
+    var imageTop = $(this).offset().top - 480;
 
     if (window.innerWidth > 749 && window.innerWidth < 1024) {
-      $(this).parent().next().css({ 'display': 'block', 'top': imageTop - imageHeightDifference });
+      $(this).parent().next().css({ 'display': 'block', 'top': imageTop });
     }
 
     if (window.innerWidth > 1023) {
-      $(this).parent().next().css({ 'display': 'block', 'top': imageTop - imageHeightDifference });
+      $(this).parent().next().css({ 'display': 'block', 'top': imageTop });
       $(this).parent().next().next().css({ 'display': 'block', 'top': imageTop });
     }
   });

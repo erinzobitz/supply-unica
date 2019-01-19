@@ -9,8 +9,17 @@
           <a class="link--secondary" href="{{ collection.url }}">{{ section.settings.link_text }}</a>
         </div>
       </div>
+      <div class="medium-up--hide">
+        <img class="feature-row__hero-image" alt="{{ collection.products.first.title }}" src="{{ collection.products.first.featured_image | img_url: '900x' }}">
+        <div class="feature-row__hero-image--link-container">
+          <a href="{{ collection.products.first.url }}">
+            <div>{{ collection.products.first.title }}</div>
+            <div>{{ collection.products.first.price | money }}</div>
+          </a>
+        </div>
+      </div>
       <div class="feature-row__text__text-box--item--right">
-        <a itemprop="url" href="{{ collection.url }}"><img alt="{{ section.settings.title }}" src="{{ collection.image | img_url: '150x' }}"></a>
+        <a itemprop="url" href="{{ collection.url }}"><img alt="{{ section.settings.title }}" src="{{ collection.image | img_url: '900x' }}"></a>
         <div class="text__tag-subtitle">Made By</div>
         <div class="text__tag-title space--mb">
           <a class="link--primary--inverse" itemprop="url" href="{{ collection.url }}">{{ collection.title }}</a>
@@ -18,7 +27,7 @@
         <div class="text__subtitle--xsmall">{{ section.settings.image_subtitle }}</div>
       </div>
     </div>
-    <div class="feature-row__hero-image__container feature-row__hero-image__container--large feature-row__item">
+    <div class="small--hide feature-row__hero-image__container feature-row__hero-image__container--large feature-row__item">
       <img class="feature-row__hero-image" alt="{{ collection.products.first.title }}" src="{{ collection.products.first.featured_image | img_url: '900x' }}">
       <div class="feature-row__hero-image--link-container">
         <a href="{{ collection.products.first.url }}">
