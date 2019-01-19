@@ -19,7 +19,13 @@
       </div>
     </div>
     <div class="feature-row__hero-image__container feature-row__hero-image__container--large feature-row__item">
-      <img class="feature-row__hero-image" alt="{{ section.settings.title }}" src="{{ section.settings.product_image | img_url: '900x' }}">
+      <img class="feature-row__hero-image" alt="{{ collection.products.first.title }}" src="{{ collection.products.first.featured_image | img_url: '900x' }}">
+      <div class="feature-row__hero-image--link-container">
+        <a href="{{ collection.products.first.url }}">
+          <div style="color: {{ section.settings.link_text_color }}">{{ collection.products.first.title }}</div>
+          <div style="color: {{ section.settings.link_text_color }}">{{ collection.products.first.price | money }}</div>
+        </a>
+      </div>
     </div>
   </div>
 </div>
@@ -59,6 +65,12 @@
         "type": "image_picker",
         "id": "product_image",
         "label": "Product Image"
+      },
+      {
+        "type": "color",
+        "id": "link_text_color",
+        "label": "Link Text Color",
+        "default": "#FFFFFF"
       },
       {
         "type": "text",
