@@ -1,6 +1,8 @@
 $(document).ready(function() {
   $(".collection-list__link--with-image").hover(function() {
-    var imageTop = $(this).offset().top - 480;
+    var minimumTop = 183;
+    var calculatedTop = $(this).offset().top - 480;
+    var imageTop = calculatedTop < minimumTop ? minimumTop : calculatedTop;
 
     if (window.innerWidth > 749 && window.innerWidth < 1024) {
       $(this).parent().next().css({ 'display': 'block', 'top': imageTop });
