@@ -360,7 +360,7 @@
       <div class="flex-container">
         {% for article in blog.articles %}
           {% for tag in article.tags %}
-            {% if tag.handle == collection.handle limit:3 %}
+            {% if tag.handle == collection.handle %}
               <div class="flex-item flex-item--one-third">
                 <a itemprop="url" href="{{ article.url }}">
                   <img class="space--mb" src="{{ article.image| img_url: '900x' }}">
