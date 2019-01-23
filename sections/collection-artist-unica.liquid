@@ -1,21 +1,3 @@
-{%- assign collection = collections[section.settings.collection] -%}
-{%- assign blog = blogs[section.settings.blog] -%}
-
-{% case section.settings.grid %}
-  {% when 2 %}
-    {%- assign max_height = 530 -%}
-    {%- assign grid_item_width = 'medium-up--one-half' -%}
-  {% when 3 %}
-    {%- assign max_height = 345 -%}
-    {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
-  {% when 4 %}
-    {%- assign max_height = 250 -%}
-    {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
-  {% when 5 %}
-    {%- assign max_height = 195 -%}
-    {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
-{% endcase %}
-
 <!-- INTERVIEW -->
 <div class="interview-overlay interview-overlay--from-right js-interview-overlay-main">
   <div class="interview-overlay__container">
@@ -51,6 +33,12 @@
           {% endif %}
           <h3 class="feature-row__text__quote">{{ section.settings.subtitle_1 }}</h3>
           <div class="feature-row__text__subtext font--small">{{ section.settings.text_1 }}</div>
+          <!-- Adding button to hero -->
+          {% if section.settings.button_label_1 != blank and section.settings.button_link_1 != blank %}
+            <a href="{{ section.settings.button_link_1 }}" class="btn">
+              {{ section.settings.button_label_1 | escape }}
+            </a>
+          {% endif %}
         </div>
         <div class="feature-row__hero-image__container feature-row__item--hero">
           <img class="feature-row__hero-image" src="{{ section.settings.image_1 | img_url: '900x' }}">
@@ -63,19 +51,34 @@
 <!-- COLLECTION 1 -->
 <div class="shopify-section index-section">
   <div class="page-width">
-    {%- assign product_limit = section.settings.grid | times: 1 -%}
+    {% if section.settings.collection_title != blank %}
+      <div class="section-header text-center">
+        <h2>{{ section.settings.collection_title | escape }}</h2>
+      </div>
+    {% endif %}
+
+    {%- assign collection = collections[section.settings.collection] -%}
 
     {% case section.settings.grid %}
       {% when 2 %}
-        {%- assign max_index = 3 -%}
+        {%- assign max_height = 530 -%}
+        {%- assign grid_item_width = 'medium-up--one-half' -%}
+      {% when 3 %}
+        {%- assign max_height = 345 -%}
+        {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
       {% when 4 %}
-        {%- assign max_index = 5 -%}
+        {%- assign max_height = 250 -%}
+        {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+      {% when 5 %}
+        {%- assign max_height = 195 -%}
+        {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
     {% endcase %}
 
-    <div class="grid grid--uniform grid--view-items">
+    {%- assign product_limit = section.settings.grid | times: 1 -%}
 
+    <div class="grid grid--uniform grid--view-items">
       {% for product in collection.products limit: product_limit %}
-        {% if forloop.index < max_index %}
+        {% if forloop.index < 5 %}
           <div class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
             {% include 'product-card-grid', max_height: max_height %}
           </div>
@@ -106,96 +109,108 @@
 </div>
 
 <!-- FEATURE ROW 2 -->
-{% if section.settings.layout_2 %}
-  <div class="shopify-section index-section">
-    <div class="page-width feature-row">
-      {% capture image_layout %}
-        <div class="feature-row__item">
-          {% if section.settings.image_2 != blank %}
-            {% capture img_id %}FeatureRowImage-{{ section.id }}{% endcapture %}
-            {% capture wrapper_id %}FeatureRowImageWrapper-{{ section.id }}{% endcapture %}
-            {%- assign img_url = section.settings.image_2 | img_url: '1x1' | replace: '_2x1.', '_{width}x.' -%}
-            {% include 'image-style' with image: section.settings.image_2, width: 545, height: 545, small_style: true, wrapper_id: wrapper_id, img_id: img_id %}
-            <div id="{{ wrapper_id }}" class="feature-row__image-wrapper js">
-              <div class="hero-small--hide" style="padding-top:{{ 1 | divided_by: section.settings.image_2.aspect_ratio | times: 100}}%;">
-                <img id="{{ img_id }}"
-                     class="feature-row__image"
-                     src="{{ section.settings.image_2 | img_url: '900x' }}"
-                     data-src="{{ img_url }}"
-                     data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
-                     data-aspectratio="{{ section.settings.image_2.aspect_ratio }}"
-                     data-sizes="auto"
-                     alt="{{ section.settings.image_2.alt | escape }}">
-              </div>
-              <div class="hero-medium-up--hide">
-                <img id="{{ img_id }}"
-                     class="feature-row__image"
-                     src="{{ section.settings.image_2 | img_url: '900x' }}"
-                     data-src="{{ img_url }}"
-                     data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
-                     data-aspectratio="{{ section.settings.image_2.aspect_ratio }}"
-                     data-sizes="auto"
-                     alt="{{ section.settings.image_2.alt | escape }}">
-              </div>
+<div class="shopify-section index-section">
+  <div class="page-width feature-row">
+    {% capture image_layout %}
+      <div class="feature-row__item">
+        {% if section.settings.image_2 != blank %}
+          {% capture img_id %}FeatureRowImage-{{ section.id }}{% endcapture %}
+          {% capture wrapper_id %}FeatureRowImageWrapper-{{ section.id }}{% endcapture %}
+          {%- assign img_url = section.settings.image_2 | img_url: '1x1' | replace: '_2x1.', '_{width}x.' -%}
+          {% include 'image-style' with image: section.settings.image_2, width: 545, height: 545, small_style: true, wrapper_id: wrapper_id, img_id: img_id %}
+          <div id="{{ wrapper_id }}" class="feature-row__image-wrapper js">
+            <div class="hero-small--hide" style="padding-top:{{ 1 | divided_by: section.settings.image_2.aspect_ratio | times: 100}}%;">
+              <img id="{{ img_id }}"
+                   class="feature-row__image"
+                   src="{{ section.settings.image_2 | img_url: '900x' }}"
+                   data-src="{{ img_url }}"
+                   data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                   data-aspectratio="{{ section.settings.image_2.aspect_ratio }}"
+                   data-sizes="auto"
+                   alt="{{ section.settings.image_2.alt | escape }}">
             </div>
-
-            <noscript>
-              {{ section.settings.image_2 | img_url: '600x600', scale: 2 | img_tag: section.settings.image_2.alt, 'feature-row__image' }}
-            </noscript>
-          {% else %}
-            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-          {% endif %}
-        </div>
-      {% endcapture %}
-
-      <div class="feature-row feature-row--mobile-reverse">
-        {% if section.settings.layout_2 == 'left' %}
-          {{ image_layout }}
-        {% endif %}
-
-        <div class="feature-row__item feature-row__text feature-row__text--{{ section.settings.layout_2 }}">
-          {% if section.settings.title_2 != blank %}
-            <div class="feature-row__text__quote-container--{{ section.settings.layout_2 }}">
-              <h3 class="feature-row__text__quote">{{ section.settings.title_2 | escape }}</h3>
+            <div class="hero-medium-up--hide">
+              <img id="{{ img_id }}"
+                   class="feature-row__image"
+                   src="{{ section.settings.image_2 | img_url: '900x' }}"
+                   data-src="{{ img_url }}"
+                   data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                   data-aspectratio="{{ section.settings.image_2.aspect_ratio }}"
+                   data-sizes="auto"
+                   alt="{{ section.settings.image_2.alt | escape }}">
             </div>
-          {% endif %}
-          {% if section.settings.text_2 != blank %}
-            <div class="feature-row__subtext-container--{{ section.settings.layout_2 }}">
-              <div class="rte-setting featured-row__subtext">{{ section.settings.text_2 }}</div>
-            </div>
-          {% endif %}
-          {% if section.settings.button_label_2 != blank and section.settings.button_link_2 != blank %}
-            <a href="{{ section.settings.button_link_2 }}" class="btn">
-              {{ section.settings.button_label_2 | escape }}
-            </a>
-          {% endif %}
-        </div>
+          </div>
 
-        {% if section.settings.layout_2 == 'right' %}
-          {{ image_layout }}
+          <noscript>
+            {{ section.settings.image_2 | img_url: '600x600', scale: 2 | img_tag: section.settings.image_2.alt, 'feature-row__image' }}
+          </noscript>
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
         {% endif %}
       </div>
+    {% endcapture %}
+
+    <div class="feature-row feature-row--mobile-reverse">
+      {% if section.settings.layout_2 == 'left' %}
+        {{ image_layout }}
+      {% endif %}
+
+      <div class="feature-row__item feature-row__text feature-row__text--{{ section.settings.layout_2 }}">
+        {% if section.settings.title_2 != blank %}
+          <div class="feature-row__text__quote-container--{{ section.settings.layout_2 }}">
+            <h3 class="feature-row__text__quote">{{ section.settings.title_2 | escape }}</h3>
+          </div>
+        {% endif %}
+        {% if section.settings.text_2 != blank %}
+          <div class="feature-row__subtext-container--{{ section.settings.layout_2 }}">
+            <div class="rte-setting featured-row__subtext">{{ section.settings.text_2 }}</div>
+          </div>
+        {% endif %}
+        {% if section.settings.button_label_2 != blank and section.settings.button_link_2 != blank %}
+          <a href="{{ section.settings.button_link_2 }}" class="btn">
+            {{ section.settings.button_label_2 | escape }}
+          </a>
+        {% endif %}
+      </div>
+
+      {% if section.settings.layout_2 == 'right' %}
+        {{ image_layout }}
+      {% endif %}
     </div>
   </div>
-{% endif %}
+</div>
 
 <!-- COLLECTION 2 -->
 <div class="shopify-section index-section">
   <div class="page-width">
-    {%- assign product_limit = section.settings.grid | times: 2 -%}
+    {% if section.settings.collection_title != blank %}
+      <div class="section-header text-center">
+        <h2>{{ section.settings.collection_title | escape }}</h2>
+      </div>
+    {% endif %}
+
+    {%- assign collection = collections[section.settings.collection] -%}
 
     {% case section.settings.grid %}
       {% when 2 %}
-        {%- assign min_index = 2 -%}
-        {%- assign max_index = 5 -%}
+        {%- assign max_height = 530 -%}
+        {%- assign grid_item_width = 'medium-up--one-half' -%}
+      {% when 3 %}
+        {%- assign max_height = 345 -%}
+        {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
       {% when 4 %}
-        {%- assign min_index = 4 -%}
-        {%- assign max_index = 9 -%}
+        {%- assign max_height = 250 -%}
+        {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+      {% when 5 %}
+        {%- assign max_height = 195 -%}
+        {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
     {% endcase %}
+
+    {%- assign product_limit = section.settings.grid | times: 2 -%}
 
     <div class="grid grid--uniform grid--view-items">
       {% for product in collection.products limit: product_limit %}
-        {% if forloop.min_index > 4 and forloop.max_index < 9 %}
+        {% if forloop.index > 4 and forloop.index < 9 %}
           <div class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
             {% include 'product-card-grid', max_height: max_height %}
           </div>
@@ -226,89 +241,103 @@
 </div>
 
 <!-- FEATURE ROW 3 -->
-{% if section.settings.layout_3 %}
-  <div class="shopify-section index-section">
-    <div class="page-width feature-row">
-      {% capture image_layout %}
-        <div class="feature-row__item">
-          {% if section.settings.image_3 != blank %}
-            {% capture img_id %}FeatureRowImage-{{ section.id }}{% endcapture %}
-            {% capture wrapper_id %}FeatureRowImageWrapper-{{ section.id }}{% endcapture %}
-            {%- assign img_url = section.settings.image_3 | img_url: '1x1' | replace: '_3x1.', '_{width}x.' -%}
-            {% include 'image-style' with image: section.settings.image_3, width: 545, height: 545, small_style: true, wrapper_id: wrapper_id, img_id: img_id %}
-            <div id="{{ wrapper_id }}" class="feature-row__image-wrapper js">
-              <div class="hero-small--hide" style="padding-top:{{ 1 | divided_by: section.settings.image_3.aspect_ratio | times: 100}}%;">
-                <img id="{{ img_id }}"
-                     class="feature-row__image"
-                     src="{{ section.settings.image_3 | img_url: '900x' }}"
-                     data-src="{{ img_url }}"
-                     data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
-                     data-aspectratio="{{ section.settings.image_3.aspect_ratio }}"
-                     data-sizes="auto"
-                     alt="{{ section.settings.image_3.alt | escape }}">
-              </div>
-              <div class="hero-medium-up--hide">
-                <img id="{{ img_id }}"
-                     class="feature-row__image"
-                     src="{{ section.settings.image_3 | img_url: '900x' }}"
-                     data-src="{{ img_url }}"
-                     data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
-                     data-aspectratio="{{ section.settings.image_3.aspect_ratio }}"
-                     data-sizes="auto"
-                     alt="{{ section.settings.image_3.alt | escape }}">
-              </div>
+<div class="shopify-section index-section">
+  <div class="page-width feature-row">
+    {% capture image_layout %}
+      <div class="feature-row__item">
+        {% if section.settings.image_3 != blank %}
+          {% capture img_id %}FeatureRowImage-{{ section.id }}{% endcapture %}
+          {% capture wrapper_id %}FeatureRowImageWrapper-{{ section.id }}{% endcapture %}
+          {%- assign img_url = section.settings.image_3 | img_url: '1x1' | replace: '_3x1.', '_{width}x.' -%}
+          {% include 'image-style' with image: section.settings.image_3, width: 545, height: 545, small_style: true, wrapper_id: wrapper_id, img_id: img_id %}
+          <div id="{{ wrapper_id }}" class="feature-row__image-wrapper js">
+            <div class="hero-small--hide" style="padding-top:{{ 1 | divided_by: section.settings.image_3.aspect_ratio | times: 100}}%;">
+              <img id="{{ img_id }}"
+                   class="feature-row__image"
+                   src="{{ section.settings.image_3 | img_url: '900x' }}"
+                   data-src="{{ img_url }}"
+                   data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                   data-aspectratio="{{ section.settings.image_3.aspect_ratio }}"
+                   data-sizes="auto"
+                   alt="{{ section.settings.image_3.alt | escape }}">
             </div>
-
-            <noscript>
-              {{ section.settings.image_3 | img_url: '600x600', scale: 2 | img_tag: section.settings.image_3.alt, 'feature-row__image' }}
-            </noscript>
-          {% else %}
-            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-          {% endif %}
-        </div>
-      {% endcapture %}
-
-      <div class="feature-row feature-row--mobile-reverse">
-        {% if section.settings.layout_3 == 'left' %}
-          {{ image_layout }}
-        {% endif %}
-
-        <div class="feature-row__item feature-row__text feature-row__text--{{ section.settings.layout_3 }}">
-          {% if section.settings.title_3 != blank %}
-          <div class="feature-row__text__quote-container--{{ section.settings.layout_3 }}">
-            <h3 class="feature-row__text__quote">{{ section.settings.title_3 | escape }}</h3>
+            <div class="hero-medium-up--hide">
+              <img id="{{ img_id }}"
+                   class="feature-row__image"
+                   src="{{ section.settings.image_3 | img_url: '900x' }}"
+                   data-src="{{ img_url }}"
+                   data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                   data-aspectratio="{{ section.settings.image_3.aspect_ratio }}"
+                   data-sizes="auto"
+                   alt="{{ section.settings.image_3.alt | escape }}">
+            </div>
           </div>
-          {% endif %}
-          {% if section.settings.text_3 != blank %}
-            <div class="feature-row__subtext-container--{{ section.settings.layout_3 }}">
-              <div class="rte-setting featured-row__subtext">{{ section.settings.text_3 }}</div>
-            </div>
-          {% endif %}
-        </div>
 
-        {% if section.settings.layout_3 == 'right' %}
-          {{ image_layout }}
+          <noscript>
+            {{ section.settings.image_3 | img_url: '600x600', scale: 2 | img_tag: section.settings.image_3.alt, 'feature-row__image' }}
+          </noscript>
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
         {% endif %}
       </div>
+    {% endcapture %}
+
+    <div class="feature-row feature-row--mobile-reverse">
+      {% if section.settings.layout_3 == 'left' %}
+        {{ image_layout }}
+      {% endif %}
+
+      <div class="feature-row__item feature-row__text feature-row__text--{{ section.settings.layout_3 }}">
+        {% if section.settings.title_3 != blank %}
+        <div class="feature-row__text__quote-container--{{ section.settings.layout_3 }}">
+          <h3 class="feature-row__text__quote">{{ section.settings.title_3 | escape }}</h3>
+        </div>
+        {% endif %}
+        {% if section.settings.text_3 != blank %}
+          <div class="feature-row__subtext-container--{{ section.settings.layout_3 }}">
+            <div class="rte-setting featured-row__subtext">{{ section.settings.text_3 }}</div>
+          </div>
+        {% endif %}
+      </div>
+
+      {% if section.settings.layout_3 == 'right' %}
+        {{ image_layout }}
+      {% endif %}
     </div>
   </div>
-{% endif %}
+</div>
 
 <!-- COLLECTION 3 -->
 <div class="shopify-section index-section">
   <div class="page-width">
-    {%- assign product_limit = section.settings.grid | times: section.settings.rows -%}
+    {% if section.settings.collection_title != blank %}
+      <div class="section-header text-center">
+        <h2>{{ section.settings.collection_title | escape }}</h2>
+      </div>
+    {% endif %}
+
+    {%- assign collection = collections[section.settings.collection] -%}
 
     {% case section.settings.grid %}
       {% when 2 %}
-        {%- assign max_index = 4 -%}
+        {%- assign max_height = 530 -%}
+        {%- assign grid_item_width = 'medium-up--one-half' -%}
+      {% when 3 %}
+        {%- assign max_height = 345 -%}
+        {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
       {% when 4 %}
-        {%- assign max_index = 8 -%}
+        {%- assign max_height = 250 -%}
+        {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+      {% when 5 %}
+        {%- assign max_height = 195 -%}
+        {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
     {% endcase %}
+
+    {%- assign product_limit = section.settings.grid | times: section.settings.rows -%}
 
     <div class="grid grid--uniform grid--view-items">
       {% for product in collection.products limit: product_limit %}
-        {% if forloop.index > max_index %}
+        {% if forloop.index > 8 %}
           <div class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
             {% include 'product-card-grid', max_height: max_height %}
           </div>
@@ -344,37 +373,9 @@
         </a>
       </div>
     {% endif %}
+
   </div>
 </div>
-
-<!-- STORIES -->
-{% if blog %}
-  <div class="shopify-section index-section--dark index-section--padded index-section--flush">
-    <div class="page-width">
-      <div class="section-header">
-        <div class="page-subheader">Stories</div>
-        <h2>Featured {{ collection.title }}</h2>
-      </div>
-
-      {%- assign blog = blogs[section.settings.blog] -%}
-      <div class="flex-container">
-        {% for article in blog.articles %}
-          {% for tag in article.tags %}
-            {% if tag.handle == collection.handle limit:3 %}
-              <div class="flex-item flex-item--one-third">
-                <a itemprop="url" href="{{ article.url }}">
-                  <img class="space--mb" src="{{ article.image| img_url: '900x' }}">
-                </a>
-                <h4>{{ article.title | escape }}</h4>
-                <a class="link--secondary" href="{{ article.url }}">Read Story</a>
-              </div>
-            {% endif %}
-          {% endfor %}
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-{% endif %}
 
 {% schema %}
   {
@@ -423,7 +424,7 @@
         "min": 2,
         "max": 5,
         "step": 1,
-        "default": 3
+        "default": 4
       },
       {
         "type": "range",
@@ -569,16 +570,11 @@
         "id": "button_link_3",
         "label": "FEATURE Button link 3"
       },
-      {
+{
         "type": "text",
         "id": "custom-title",
         "label": "Heading",
         "default": "Custom content"
-      },
-      {
-        "id": "blog",
-        "type": "blog",
-        "label": "Blog"
       }
     ],
     "blocks": [
