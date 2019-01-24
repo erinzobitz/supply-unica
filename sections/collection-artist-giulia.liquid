@@ -51,6 +51,12 @@
           {% endif %}
           <h3 class="feature-row__text__quote">{{ section.settings.subtitle_1 }}</h3>
           <div class="feature-row__text__subtext font--small">{{ section.settings.text_1 }}</div>
+          <!-- Adding button to hero -->
+          {% if section.settings.button_label_1 != blank and section.settings.button_link_1 != blank %}
+            <a href="{{ section.settings.button_link_1 }}" class="btn">
+              {{ section.settings.button_label_1 | escape }}
+            </a>
+          {% endif %}
         </div>
         <div class="feature-row__hero-image__container feature-row__item--hero">
           <img class="feature-row__hero-image" src="{{ section.settings.image_1 | img_url: '900x' }}">
@@ -60,6 +66,7 @@
   </div>
 </div>
 
+{% comment removing section %}
 <!-- COLLECTION 1 -->
 <div class="shopify-section index-section">
   <div class="page-width">
@@ -104,6 +111,7 @@
     </div>
   </div>
 </div>
+{% endcomment %}
 
 <!-- FEATURE ROW 2 -->
 {% if section.settings.layout_2 %}
@@ -347,6 +355,7 @@
   </div>
 </div>
 
+{% comment removing section %}
 <!-- STORIES -->
 {% if blog %}
   <div class="shopify-section index-section--dark index-section--padded index-section--flush">
@@ -375,6 +384,7 @@
     </div>
   </div>
 {% endif %}
+{% endcomment %}
 
 {% schema %}
   {
