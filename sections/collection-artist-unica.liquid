@@ -74,11 +74,11 @@
         {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
     {% endcase %}
 
-    {%- assign product_limit = section.settings.grid | times: 1 -%}
+    {%- assign product_limit = section.settings.grid | times: 2 -%}
 
     <div class="grid grid--uniform grid--view-items">
       {% for product in collection.products limit: product_limit %}
-        {% if forloop.index < 5 %}
+        {% if forloop.index < 7 %}
           <div class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
             {% include 'product-card-grid', max_height: max_height %}
           </div>
@@ -210,7 +210,7 @@
 
     <div class="grid grid--uniform grid--view-items">
       {% for product in collection.products limit: product_limit %}
-        {% if forloop.index > 4 and forloop.index < 9 %}
+        {% if forloop.index > 6 and forloop.index < 9 %}
           <div class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
             {% include 'product-card-grid', max_height: max_height %}
           </div>
